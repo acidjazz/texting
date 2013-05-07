@@ -1,0 +1,27 @@
+body,
+html {
+  padding: 0;
+  margin: 0;
+  font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+  font-size: 13px;
+}
+.header,
+.footer {
+  text-align: center;
+  padding: 40px;
+  background-color: #c0c0c0;
+}
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+.container {
+  padding: 40px;
+  text-align: center;
+  font-size: 16px;
+  min-height: 600px;
+}
