@@ -3,11 +3,17 @@
 html
   head
     title texting.io
+    link(href='http://fonts.googleapis.com/css?family=Ubuntu|Droid+Sans',rel='stylesheet',type='text/css')
+
     link(rel='stylesheet',href='css/main.css',type='text/css',media='all')
-    script(type='text/javascript',src='jst/lib/jquery-1.9.1.min.js')
+    script(type='text/javascript',src='jst/lib/jquery-2.0.0.min.js')
     script(type='text/javascript',src='jst/main.js')
   body
-    .header header content
+    .header
+      .hbutton.login
+        a(href=auth) Sign in With Google
+      .logo texting.io
+      .clear
     .container
       block content
     .footer footer content

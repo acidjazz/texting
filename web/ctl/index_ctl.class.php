@@ -4,10 +4,9 @@ class index_ctl {
 
   public function index() {
 
-    $_GET = kdebug::array_generate();
+    $auth = (new google())->authURL();
 
-
-    jade::c('index'); 
+    jade::c('index', ['auth' => $auth]); 
 
   }
 

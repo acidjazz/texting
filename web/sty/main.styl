@@ -1,29 +1,46 @@
 
+@import 'nib'
 @import _vars
+
+.clear
+  clearfix()
 
 body,html
   padding 0
   margin 0
-  font-family 'lucida grande',tahoma,verdana,arial,sans-serif
-  font-size 13px
+  font-family 'Droid Sans',tahoma,verdana,arial,sans-serif
+  font-size 14px
+  color black1
 
+.header
+  padding 5px 20px
+  background-color blue1
+  color white1
+  .logo
+    float left
+    font-size 28px
+    font-weight bold
 
-.header, .footer
-  text-align center
-  padding 40px
-  background-color grey1
-
-
-.clear
-  clear both
-  display block
-  overflow hidden
-  visibility hidden
-  width 0
-  height 0
+  .login
+    float right
+    color white1
+  .hbutton
+    cursor pointer
+    border 2px solid blue3
+    border-radius 5px
+    background-color blue2
+    padding 5px 10px
+    a
+      color white1
+      text-decoration none
 
 .container
-  padding 40px
+  font-size 1em
   text-align center
-  font-size 16px
-  min-height 600px
+  background-color white2
+  padding 100px
+
+
+.footer
+  text-align right
+  padding 10px 20px

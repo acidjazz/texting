@@ -1,27 +1,55 @@
+.clear {
+  zoom: 1;
+}
+.clear:before,
+.clear:after {
+  content: "";
+  display: table;
+}
+.clear:after {
+  clear: both;
+}
 body,
 html {
   padding: 0;
   margin: 0;
-  font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
-  font-size: 13px;
+  font-family: 'Droid Sans', tahoma, verdana, arial, sans-serif;
+  font-size: 14px;
+  color: #5d5d5d;
 }
-.header,
-.footer {
-  text-align: center;
-  padding: 40px;
-  background-color: #c0c0c0;
+.header {
+  padding: 5px 20px;
+  background-color: #54728c;
+  color: #fff;
 }
-.clear {
-  clear: both;
-  display: block;
-  overflow: hidden;
-  visibility: hidden;
-  width: 0;
-  height: 0;
+.header .logo {
+  float: left;
+  font-size: 28px;
+  font-weight: bold;
+}
+.header .login {
+  float: right;
+  color: #fff;
+}
+.header .hbutton {
+  cursor: pointer;
+  border: 2px solid #466077;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #708ba6;
+  padding: 5px 10px;
+}
+.header .hbutton a {
+  color: #fff;
+  text-decoration: none;
 }
 .container {
-  padding: 40px;
+  font-size: 1em;
   text-align: center;
-  font-size: 16px;
-  min-height: 600px;
+  background-color: #f9f9f9;
+  padding: 100px;
+}
+.footer {
+  text-align: right;
+  padding: 10px 20px;
 }
