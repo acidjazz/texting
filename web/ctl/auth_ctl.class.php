@@ -9,9 +9,11 @@ class auth_ctl {
     }
 
     $goo = new google();
-    $results = $goo->codeVerify($_REQUEST['code']);
-    $info = $goo->api('userinfo');
 
+    $results = $goo->codeVerify($_REQUEST['code']);
+    hpr($results);
+
+    $info = $goo->api('userinfo');
     hpr($info);
 
   }
