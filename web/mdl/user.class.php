@@ -32,4 +32,19 @@ class user extends kcol {
 
   }
 
+  public function save($data=false, $options=[]) {
+
+    if (!$this->exists()) {
+      $this->created = new MongoDate();
+      $this->logins = 1;
+    } else {
+      $this->logins++;
+    }
+
+    $this->updated = new MongoDate();
+
+    parent::save($data,$options);
+
+  }
+
 }

@@ -10,8 +10,8 @@ class google {
 
   public static $url_auth = 'https://accounts.google.com/o/oauth2/auth';
   public static $url_token = 'https://accounts.google.com/o/oauth2/token';
-
   public static $url_scope = 'https://www.googleapis.com/auth/';
+
   public static $scope = ['userinfo.email', 'userinfo.profile'];
 
   public static $url_api = 'https://www.googleapis.com/oauth2/v1/';
@@ -70,10 +70,14 @@ class google {
 
     if (isset($results['access_token']) && !empty($results['access_token'])) {
       self::$access_token = $results['access_token'];
+    } else {
+      return false;
     }
 
     if (isset($results['id_token']) && !empty($results['id_token'])) {
       $results['jwt'] = self::decode($results['id_token']);
+    } else {
+      return false;
     }
 
     return $results;
