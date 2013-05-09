@@ -10,9 +10,13 @@ class google {
 
   public static $url_auth = 'https://accounts.google.com/o/oauth2/auth';
   public static $url_token = 'https://accounts.google.com/o/oauth2/token';
+
   public static $url_scope = 'https://www.googleapis.com/auth/';
 
-  public static $scope = ['userinfo.email', 'userinfo.profile'];
+  public static $scope = [
+    'https://www.googleapis.com/auth/userinfo.profile',
+    'https://www.google.com/m8/feeds'
+  ];
 
   public static $url_api = 'https://www.googleapis.com/oauth2/v1/';
 
@@ -36,23 +40,12 @@ class google {
       'response_type' => 'code',
       'client_id' => self::$client_id,
       'redirect_uri' => self::$redirect_uri,
-      'scope' => self::scopes(),
+      'scope' => implode(' ', self::$scope)
       //'state' => 'parameter' // google roundtrips this 
-      //'login_hint' => 'xxx@gmail.com' // hint at which account we want
+      //'login_hint' => 'username@gmail.com' // hint at which account we want
     ];
 
     return self::$url_auth.'?'.http_build_query($params);
-
-  }
-
-  public static function scopes() {
-
-    $return = [];
-    foreach (self::$scope as $permission) {
-      $return[] = self::$url_scope.$permission;
-    }
-
-    return implode(' ', $return);
 
   }
 

@@ -16,6 +16,12 @@ class index_ctl {
 
     jade::c('index', ['user' => $this->user, 'authURL' => (new google())->authURL()]); 
 
+    hpr($this->user);
+    $goo = new google();
+    $goo::$access_token = $this->user['access_token'];
+    hpr($goo->api('userinfo'));
+
+
   }
 
   public static function loggedIn() {

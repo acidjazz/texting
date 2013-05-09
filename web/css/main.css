@@ -218,6 +218,8 @@ html {
   padding: 100px;
 }
 .footer {
+  color: #fff;
   text-align: right;
   padding: 10px 20px;
+  background-color: #54728c;
 }
