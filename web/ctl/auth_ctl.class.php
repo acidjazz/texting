@@ -2,6 +2,12 @@
 
 class auth_ctl {
 
+  public $user = false;
+
+  public function __construct() {
+    $this->user = user::loggedIn();
+  }
+
   public function callback() {
 
     if (!isset($_REQUEST['code']) && empty($_REQUEST['code'])) {
@@ -10,27 +16,25 @@ class auth_ctl {
 
     $goo = new google();
 
+
     if ($results = $goo->codeVerify($_REQUEST['code'])) {
 
       $user = user::i(user::findOne(array('id' => $results['jwt']['id'])));
 
       if (!$user->exists()) {
 
-        $userinfo = $goo->api('userinfo');
+        $userinfo = $goo->api('https://www.googleapis.com/oauth2/v2/userinfo');
 
         foreach ($userinfo as $key=>$value) {
           $user->$key = $value;
         }
 
-        //hpr('user does not exist, storeing info');
-
-      } else {
-
-        //hpr('user exists, no need to store info');
-
       }
 
       $user->access_token = $goo::$access_token;
+      if (isset($results['refresh_token'])) {
+        $user->refresh_token = $results['refresh_token'];
+      }
       $user->access_token_expires = $results['expires_in'] + time();
 
       // create our cookie
@@ -38,9 +42,6 @@ class auth_ctl {
       
       $user->save();
 
-      //hpr('saving user data and refreshing cookie');
-
-      //hpr($results);
       Header('Location: /');
 
     } else {
@@ -53,9 +54,9 @@ class auth_ctl {
 
   public function logout() {
 
-    if ($user = index_ctl::loggedIn()) {
-      $user->sessions = summon::remove($user->sessions);
-      $user->save();
+    if ($this->user) {
+      $this->user->sessions = summon::remove($user->sessions);
+      $this->user->save();
       Header('Location: /');
     }
 

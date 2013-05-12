@@ -14,30 +14,32 @@ class google {
   public static $url_scope = 'https://www.googleapis.com/auth/';
 
   public static $scope = [
-    'https://www.googleapis.com/auth/userinfo.profile',
-    'https://www.google.com/m8/feeds'
+    'userinfo' => 'https://www.googleapis.com/auth/userinfo.profile',
+    'contacts' => 'https://www.google.com/m8/feeds/'
   ];
 
-  public static $url_api = 'https://www.googleapis.com/oauth2/v1/';
-
-  public static $json_certs = '{"b55344bc52e40221cb6899431fcc293d3c7b529a": "-----BEGIN CERTIFICATE-----\nMIICITCCAYqgAwIBAgIIcnxObuDDBLAwDQYJKoZIhvcNAQEFBQAwNjE0MDIGA1UE\nAxMrZmVkZXJhdGVkLXNpZ25vbi5zeXN0ZW0uZ3NlcnZpY2VhY2NvdW50LmNvbTAe\nFw0xMzA1MDcxMTQzMzRaFw0xMzA1MDkwMDQzMzRaMDYxNDAyBgNVBAMTK2ZlZGVy\nYXRlZC1zaWdub24uc3lzdGVtLmdzZXJ2aWNlYWNjb3VudC5jb20wgZ8wDQYJKoZI\nhvcNAQEBBQADgY0AMIGJAoGBAKFRoo3jDNKTQSqJHeg8vAm7MbNZnMwpj1JG6yLQ\nZw3YPDsYV3lg/nEKWPXJjfijjEhCYunRe5YDLa8+nQ6yHyqfjE5BDLWLAq3kR8kS\ne4Y+jXbV83oOr7f58ARJBoIHAIlN55DJ8E0fpUno7sqA+F2eadqUNFto5QLJxZt9\nyfMRAgMBAAGjODA2MAwGA1UdEwEB/wQCMAAwDgYDVR0PAQH/BAQDAgeAMBYGA1Ud\nJQEB/wQMMAoGCCsGAQUFBwMCMA0GCSqGSIb3DQEBBQUAA4GBAIYgWpn4xdxfvpGH\nEZqNYYzoGwXk2dZdcru6A8Qj7COILZ7rfeIRriZJR3yQVgqdLFCTw7kzWNCCiEL0\nPw72O9O0ntC/RsfP1+N1CnMWqBn1c9mrLmTpPXecJisDHN5lq7Qs/lXjOOuZXYsF\n+4FzVxAAjZt8CcKmS4xOUzHR3kux\n-----END CERTIFICATE-----\n","81e0a6eaca3d9d2e03c8f01c6bee4cb5130c293a": "-----BEGIN CERTIFICATE-----\nMIICITCCAYqgAwIBAgIIG10PG61kdJ0wDQYJKoZIhvcNAQEFBQAwNjE0MDIGA1UE\nAxMrZmVkZXJhdGVkLXNpZ25vbi5zeXN0ZW0uZ3NlcnZpY2VhY2NvdW50LmNvbTAe\nFw0xMzA1MDgxMTI4MzRaFw0xMzA1MTAwMDI4MzRaMDYxNDAyBgNVBAMTK2ZlZGVy\nYXRlZC1zaWdub24uc3lzdGVtLmdzZXJ2aWNlYWNjb3VudC5jb20wgZ8wDQYJKoZI\nhvcNAQEBBQADgY0AMIGJAoGBANDXU7hzi48EZSMgVFzU5/pGLUttbr1MvQI7kPOa\njtIYDekjwVbM5UEMSE9UnezDfgi0u+y1fQ+ARCbtuCwtqKO5rhoVrX79Z0L050Wh\nZyBZyQxvEOY8HoOu/cnzjzEw+TUeYNR4OGO61ERPgGY/SAYNo9r8fz/7fuRHR1/b\nN5KpAgMBAAGjODA2MAwGA1UdEwEB/wQCMAAwDgYDVR0PAQH/BAQDAgeAMBYGA1Ud\nJQEB/wQMMAoGCCsGAQUFBwMCMA0GCSqGSIb3DQEBBQUAA4GBAJkOTybAXjksnzjL\nsSmLfWjIKOLV+i4BRD/xW5V59F0o5pQ5Dfb5k6ui90OlkC64PM7g4n2sNcKctghT\nIW8e4iI4sExKUd/8AdPQCsdQTQHAwJtKcrQNnEDjaxIpnFyfpL6j7Nf9XnTkdG40\n8SyGRAq28K29jIJFAoINS22QFDQv\n-----END CERTIFICATE-----\n"}';
+  public static $certs_url = 'https://www.googleapis.com/oauth2/v1/certs';
   public static $certs = [];
 
-  public function __construct($client_id=G_CLIENT_ID, $client_secret=G_SECRET, $redirect_uri=G_REDIRECT_URI) {
+  // assign our app-specific information
+  public function __construct($access_token=false, $client_id=G_CLIENT_ID, $client_secret=G_SECRET, $redirect_uri=G_REDIRECT_URI) {
 
+    self::$access_token = $access_token;
     self::$client_id = $client_id;
     self::$client_secret = $client_secret;
     self::$redirect_uri = $redirect_uri;
 
-    self::$certs = json_decode(self::$json_certs, true);
+    self::$certs = json_decode(file_get_contents(self::$certs_url), true);
 
   }
 
 
+  // compile the url for the user to authorize us
   public function authURL() {
 
     $params = [
       'response_type' => 'code',
+      'access_type' => 'offline',
       'client_id' => self::$client_id,
       'redirect_uri' => self::$redirect_uri,
       'scope' => implode(' ', self::$scope)
@@ -49,6 +51,7 @@ class google {
 
   }
 
+  // verify our returned code
   public function codeVerify($code) {
 
     $params = [
@@ -77,8 +80,50 @@ class google {
 
   }
 
-  public function api($url, $params=array(), $type='get') {
-    return json_decode(self::get(self::$url_api.$url, array_merge(['access_token' => self::$access_token], $params), $type), true);
+  public function refresh($refresh_token) {
+
+    $params = [
+      'client_id' => self::$client_id,
+      'client_secret' => self::$client_secret,
+      'refresh_token' =>$refresh_token,
+      'grant_type' => 'refresh_token'
+    ];
+
+    $results = json_decode(self::get(self::$url_token, $params, 'post'), true);
+
+    if (isset($results['error'])) {
+      return false;
+    }
+
+
+    if (isset($results['access_token']) && !empty($results['access_token'])) {
+      self::$access_token = $results['access_token'];
+    }
+
+    if (isset($results['id_token']) && !empty($results['id_token'])) {
+      $results['jwt'] = self::decode($results['id_token']);
+    }
+
+    return $results;
+
+  }
+
+  public function api($url, $params=array(), $type='get', $result='json') {
+
+    $response = self::get($url, array_merge(['access_token' => self::$access_token], $params), $type);
+
+    if ($result == 'json') {
+
+      $json = json_decode($response, true);
+
+      if ($json == null) {
+        return false;
+      }
+
+      return $json;
+    }
+
+    return $response;
   }
 
   public static function get($url, $params, $type='get') {
@@ -86,7 +131,6 @@ class google {
     $handler = curl_init();
 
     curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($handler, CURLOPT_USERAGENT, 'facebook-php-2.0');
 
     if ($type == 'post') {
 
@@ -109,6 +153,7 @@ class google {
 
   }
 
+  // decode and verify a JWT (json web token) w/ googles certs
   public static function decode($jwt, $verify=true) {
 
     $tks = explode('.', $jwt);
@@ -152,13 +197,13 @@ class google {
 
       if ($verified != true) {
         throw new UnexpectedValueException('Signature verification failed');
+        return false;
       }
 
 
     }
 
     return $payload;
-
 
   }
 

@@ -1,0 +1,81 @@
+
+.smodal
+  position fixed
+  width w = 400px
+  height h = 150px
+  background-color blue1
+  top 50%
+  left 50%
+  margin-left -(w / 2)px
+  margin-top -(h / 2)px
+  box-shadow 0 0 10px 0 rgba(0, 0, 0, 0.5)
+  .title, .detail
+    color white1
+    text-align center
+    padding 10px
+    font-size 1.2em
+  .detail
+    font-style italic
+  .title
+    font-size 2em
+
+.smodal.off
+  height 0px
+  opacity 0
+
+.smodal.on
+  height 150px
+  opacity 1
+
+.overlay
+  position absolute
+  top 0px
+  left 0px
+  width 100%
+  height 100%
+  background-color rgba(255, 255, 255, 0.8)
+
+.overlay.on
+  display block
+.overlay.off
+  display none
+
+.focus
+  filter(blur(2px))
+  transform scale(0.95)
+
+.progress
+  margin auto
+  position relative
+  width 350px
+  height 25px
+  padding 5px
+  border-radius 5px
+  background-color blue3
+  box-shadow inset 0 0px 1px rgba(0, 0, 0, 0.5)
+  color white1
+  .copy
+    color white1
+    font-weight bold
+    text-align center
+    border 1px solid #ff000
+    margin-top -25px
+
+  &.orange span
+    transition width 3s
+    display inline-block
+    color white1
+    height 100%
+    width 0px
+    border-radius 3px
+    background-color #fecf23
+    background linear-gradient(top, #fecf23, #fd9215)
+    box-shadow 0 1px 0 rgba(255,255,255,0.5) inset
+
+.progress.on
+  display block
+
+.progress.off
+  display none
+
+

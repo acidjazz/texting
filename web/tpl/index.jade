@@ -4,19 +4,15 @@ extends layout
 block header
 
   if user == false
-    .hbutton.login
-      a(href=authURL) Sign in With Google
+    include header_off
   else
-    .profile
-      .name #{user.name}
-      .tools
-        .hbutton.logout
-          a(href='/auth/logout') logout 
-      .picture
-        img(src=user.picture)
+    include header_on
 
   .logo texting.io
   .clear
 
 block content
-  .container this is the container
+  if user == false
+    include content_off
+  else
+    include content_on

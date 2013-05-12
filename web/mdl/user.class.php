@@ -4,7 +4,8 @@ class user extends kcol {
 
   // restrict types of fields
   protected $_types = [
-    'created' => 'date'
+    'created' => 'date',
+    'updated' => 'date'
   ];
 
   // specify your overrode fields
@@ -37,6 +38,7 @@ class user extends kcol {
     if (!$this->exists()) {
       $this->created = new MongoDate();
       $this->logins = 1;
+      $this->contacts_import = false;
     } else {
       $this->logins++;
     }
@@ -44,6 +46,32 @@ class user extends kcol {
     $this->updated = new MongoDate();
 
     parent::save($data,$options);
+
+  }
+
+  public static function loggedIn() {
+
+    if ($data = summon::check()) {
+
+      $user = user::i(user::findOne(array('id' => $data['user_id'])));
+      
+      if ($user->exists() && isset($user->sessions[$data['hash']])) {
+        return $user;
+      }
+
+    }
+
+    return false;
+
+  }
+
+  public function tokenExpires() {
+
+    if (!$this->exists()) {
+      return false;
+    }
+
+    return $this->access_token_expires - time();
 
   }
 

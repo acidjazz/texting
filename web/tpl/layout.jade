@@ -7,9 +7,26 @@ html
     link(rel='stylesheet',href='css/main.css',type='text/css',media='all')
     script(type='text/javascript',src='jst/lib/jquery-2.0.0.min.js')
     script(type='text/javascript',src='jst/main.js')
+    script(type='text/javascript',src='jst/user.js')
+    script(type='text/javascript',src='jst/contacts.js')
   body
-    .header
-      block header
-    .container
-      block content
-    .footer footer content
+    .body
+      .header
+        block header
+      .container
+        block content
+      .footer footer content
+    .overlay.off
+    .smodal.off
+      .title 
+      .progress.orange.off
+        span
+        .copy 0%
+      .detail
+
+  if user != false
+    script
+      user.loggedin = true;
+      user.contacts_import = #{user.contacts_import};
+  script
+    _.i();
