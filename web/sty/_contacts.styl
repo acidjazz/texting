@@ -1,0 +1,57 @@
+
+.contacts
+  float left
+  width 100px
+  height 500px
+  transition width 0.2s
+  &.loading
+    background-color black1
+  .body
+    position relative
+    overflow hidden
+    height 100%
+
+
+.resizer
+  cursor ew-resize
+  position relative
+  float right
+  width 5px
+  height 500px
+  background-color white3
+  border-left 2px solid white4
+  border-right 2px solid white4
+  .handle
+    position absolute
+    top 50%
+    width 5px
+    height 20px
+    padding 10px 0
+    margin-top -20px
+    cursor pointer
+    &:hover
+      background-color rgba(0, 0, 255, 0.2)
+    .dot
+      font-size 2em
+      line-height 0.25em
+      color black2
+      margin 0 0 0 -2px
+
+.ghost
+  position absolute
+  top 0px
+  left 0px
+  width 7px
+  height 100%
+  transition left 0.2s
+
+.ghost:hover 
+  background-color rgba(0, 255, 0, 0.5)
+
+.ghost:active
+  background-color rgba(255, 155, 0, 0.8)
+
+
+.windows
+  border 1px solid #00ff00
+  margin 0 0 0 110px

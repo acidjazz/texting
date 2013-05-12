@@ -17,4 +17,13 @@ class index_ctl {
 
   }
 
+  public function loader() {
+
+    jade::c('_loader', [
+      'user' => ($this->user == false) ? false : $this->user->data(), 
+      'authURL' => (new google())->authURL()
+    ]);
+
+  }
+
 }

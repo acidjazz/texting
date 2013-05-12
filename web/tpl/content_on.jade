@@ -1,1 +1,13 @@
-.container container (user logged in as #{user.name})
+.container
+  .contacts.loading
+    .resizer(data-for='.contacts')
+      .ghost
+      .handle
+        .dot  &middot
+        .dot  &middot
+        .dot  &middot
+    .body
+      include _loader
+      .clear
+  .windows .windows (user logged in as #{user.name})
+  .clear

@@ -27,7 +27,7 @@ class contactsImport {
 
     unset($this->user->contacts_import_percent);
     unset($this->user->contacts_import_detail);
-    //$this->user->contacts_import = time();
+    $this->user->contacts_import = time();
     $this->user->save();
 
     return true;
