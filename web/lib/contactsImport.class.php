@@ -9,8 +9,8 @@ class contactsImport {
 
   public function drop() {
 
-    contact::drop(array('_user_id' => $this->user->id()));
-    contact::grid()->drop(array('_user_id' => $this->user->id()));
+    contact::col()->remove(['_user_id' => $this->user->id()]);
+    contact::grid()->remove(['_user_id' => $this->user->id()]);
     return true;
 
   }
@@ -86,7 +86,7 @@ class contactsImport {
         foreach($contacts['feed']['entry'] as $entry) {
 
           // not sure this is needed.. not really storing anything
-          $contact = contact::i(contact::findOne(array('id' => $entry['id']['$t'])));
+          $contact = contact::i(contact::findOne(['id' => $entry['id']['$t']]));
 
           if ($contact->exists()) {
             // check for more groups

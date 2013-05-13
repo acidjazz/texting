@@ -10,6 +10,8 @@ var _ = {
     // initiate contact import if we haven't yet
     if (user.loggedin && !user.contacts_import) {
       contacts.import();
+    } else {
+      contacts.load();
     }
 
   },
@@ -47,6 +49,23 @@ var _ = {
       }
 
     }
+
+    return true;
+
+  },
+
+  n: function(copy) {
+
+    if (!copy) {
+      $('.notice').removeClass('on').addClass('off');
+      return true  
+    }
+
+    if (!$('.notice').hasClass('on')) {
+      $('.notice').removeClass('off').addClass('on');
+    }
+
+    $('.notice .copy').html(copy);
 
     return true;
 

@@ -3,6 +3,7 @@
 html
   head
     title texting.io
+    link(rel="shortcut icon",href="/img/favicon.png")
     link(href='http://fonts.googleapis.com/css?family=Ubuntu|Droid+Sans',rel='stylesheet',type='text/css')
     link(rel='stylesheet',href='/css/main.css',type='text/css',media='all')
     script(type='text/javascript',src='/jst/lib/jquery-2.0.0.min.js')
@@ -18,7 +19,7 @@ html
         block header
       .container
         block content
-      .footer footer content
+      .footer txt 
     .overlay.off
     .smodal.off
       .title 
@@ -26,6 +27,8 @@ html
         span
         .copy 0%
       .detail
+    .notice.off
+      .copy this is a notice
 
   if user != false
     script

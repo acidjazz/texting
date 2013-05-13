@@ -32,16 +32,4 @@ class contact extends kcol {
 
   }
 
-  public function save($data=false, $options=[]) {
-
-    if (!$this->exists()) {
-      $this->imported = new MongoDate();
-    }
-
-    $this->updated = new MongoDate();
-
-    parent::save($data,$options);
-
-  }
-
 }

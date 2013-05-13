@@ -1,15 +1,17 @@
 
 .contacts
   float left
-  width 100px
+  width 200px
   height 500px
   transition width 0.2s
   &.loading
-    background-color black1
+    background-color white3
   .body
     position relative
-    overflow hidden
     height 100%
+    overflow hidden
+  &.scrollable .body
+    overflow-y auto
 
 
 .resizer
@@ -43,7 +45,6 @@
   left 0px
   width 7px
   height 100%
-  transition left 0.2s
 
 .ghost:hover 
   background-color rgba(0, 255, 0, 0.5)
@@ -52,6 +53,45 @@
   background-color rgba(255, 155, 0, 0.8)
 
 
-.windows
-  border 1px solid #00ff00
-  margin 0 0 0 110px
+.contact
+  cursor pointer
+  border-bottom 1px solid white4
+  padding 2px
+  .name
+    white-space nowrap
+    text-overflow ellipsis
+    overflow hidden
+    color black1
+    line-height 40px
+    padding 0 0 0 5px
+
+  .picture
+    float right
+    width size = 40px
+    height size
+    img
+      width size
+    border-radius 50%
+    overflow hidden
+  &:hover
+    background-color blue1
+  &:hover .name
+    color white1
+  &:hover .default .bottom, &:hover .default .top
+    background-color white1
+    .name
+      color white1
+  .default
+    overflow hidden
+    .top
+      width 25px
+      height 25px
+      background-color blue1
+      border-radius 50%
+      margin 5px auto 0
+    .bottom
+      width 40px
+      height 10px
+      background-color blue1
+      border-radius 50% 50% 0 0
+      margin auto

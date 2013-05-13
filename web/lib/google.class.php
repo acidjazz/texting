@@ -39,7 +39,7 @@ class google {
 
     $params = [
       'response_type' => 'code',
-      'access_type' => 'offline',
+      //'access_type' => 'offline',
       'client_id' => self::$client_id,
       'redirect_uri' => self::$redirect_uri,
       'scope' => implode(' ', self::$scope)

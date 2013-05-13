@@ -3,6 +3,7 @@
 
 web/cfg/config.php
 web/css/*.css
+web/img/pictures/*
 
 ## android
 

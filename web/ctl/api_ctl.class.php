@@ -19,7 +19,37 @@ class api_ctl {
     return true;
   }
 
-  public function contactsImport() {
+  public function __call($method, $args) {
+
+    if (!$this->loggedIn()) {
+      return false;
+    }
+
+    if (!method_exists($this, '_'.$method)) {
+      echo json_encode(['error' => 'method restricted']);
+      return false;
+    }
+
+    call_user_func_array([$this, '_'.$method], $args);
+
+  }
+
+  private function _contactsList() {
+
+    $contacts = [];
+    foreach (contact::find(['_user_id' => $this->user->id()]) as $c) {
+      $contact = contact::i($c);
+      $contacts[$contact->id(true)] = $contact->data();
+    }
+
+    $html = jade::c('_contacts', ['contacts' => $contacts], true);
+
+    echo json_encode(['success' => true, 'contacts' => $contacts, 'html' => $html], JSON_PRETTY_PRINT);
+    return true;
+
+  }
+
+  private function _contactsImport() {
 
     if (!$this->loggedIn()) {
       echo json_encode(['error' => 'user not logged in']);
@@ -75,7 +105,7 @@ class api_ctl {
 
   }
 
-  public function contactsImportProgress() {
+  private function _contactsImportProgress() {
 
     sleep(1);
 

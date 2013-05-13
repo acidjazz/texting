@@ -23,10 +23,12 @@ var resizer = {
 
   },
 
-  up: function() {
+  up: function(event) {
 
     if (resizer.mdown && resizer.mdrag) {
-      resizer.el.css({'width': (resizer.el.width() + event.clientX-resizer.origin) + 'px'});
+      var size = resizer.el.width() + event.clientX-resizer.origin
+      resizer.el.css({'width': size + 'px'});
+      $('.boxes').css({'margin-left': (size+10) + 'px'});
     }
     resizer.mdown = false;
     $('.ghost').css({'left': '0px'});
@@ -34,7 +36,7 @@ var resizer = {
 
   },
 
-  move: function() {
+  move: function(event) {
 
     if (resizer.mdown) {
       $('.ghost').css({'left': (event.clientX-resizer.el.width()) + 'px'});
@@ -46,10 +48,14 @@ var resizer = {
 
   dbl: function() {
 
-    if (resizer.el.width() == '15') {
-      resizer.el.css('width', '100px');
+    if (resizer.el.width() == '9') {
+      resizer.el.css('width', '200px');
+      $('.boxes').css({'margin-left': '210px'});
+      resizer.el.addClass('scrollable');
     } else {
-      resizer.el.css('width', '15px');
+      resizer.el.css('width', '9px');
+      $('.boxes').css({'margin-left': '19px'});
+      resizer.el.removeClass('scrollable');
     }
 
 

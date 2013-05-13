@@ -1,0 +1,11 @@
+
+each contact,index in contacts
+  .contact(data-id=index,title=contact.name)
+    .picture
+      if contact.picture
+        img(src='/img/pictures/' + contact.picture['$id'] + '.jpeg')
+      else
+        .default
+          .top
+          .bottom
+    .name #{contact.name}

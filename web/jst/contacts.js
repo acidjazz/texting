@@ -4,6 +4,13 @@ var contacts = {
 
   pulling: false,
   interval: false,
+  list: {},
+
+  handlers: function() {
+
+    $('.contacts .contact').dblclick(contacts.select);
+
+  },
 
   import: function() {
 
@@ -47,6 +54,30 @@ var contacts = {
 
     });
 
+  },
+
+  load: function() {
+
+    $.get('/api/contactsList', function(response) {
+
+      if (response.success) {
+
+        $('.contacts').removeClass('loading').addClass('scrollable');
+        $('.contacts .body').html(response.html);
+        contacts.list = response.contacts;
+        contacts.handlers();
+
+      }
+
+
+    });
+
+  },
+
+  select: function() {
+
+
   }
+
 
 }
