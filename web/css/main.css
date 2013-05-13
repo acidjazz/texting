@@ -708,12 +708,12 @@ border-radius: 4px; }
   border-bottom: 2px solid #466176;
   color: #fff;
 }
-.header .title {
+.header > .title {
   float: left;
   font-size: 2.5em;
   font-weight: bold;
 }
-.header .logo {
+.header > .logo {
   background: url("/img/logo.png");
   -webkit-background-size: 100%;
   -moz-background-size: 100%;
@@ -723,7 +723,7 @@ border-radius: 4px; }
   float: left;
   margin: 10px 0 0 10px;
 }
-.header .login {
+.header > .login {
   float: right;
   color: #fff;
   margin: 5px 0 0 0;
@@ -736,20 +736,20 @@ border-radius: 4px; }
   background-color: #708ba6;
   padding: 5px 12px;
 }
-.header .hbutton a {
+.header .hbutton > a {
   color: #fff;
   text-decoration: none;
 }
-.header .profile {
+.header > .profile {
   float: right;
 }
-.header .profile .name {
+.header > .profile > .name {
   float: left;
   margin: 10px 0 0 0;
   font-size: 1.3em;
   padding: 0 5px;
 }
-.header .profile .picture {
+.header > .profile > .picture {
   float: right;
   width: 40px;
   height: 40px;
@@ -758,15 +758,15 @@ border-radius: 4px; }
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
-.header .profile .picture img {
+.header > .profile > .picture img {
   width: inherit;
   height: inherit;
 }
-.header .profile .tools {
+.header > .profile > .tools {
   float: right;
   margin: 0 0 0 -10px;
 }
-.header .profile .tools .logout {
+.header > .profile > .tools > .logout {
   text-align: center;
   margin: 6px 0 0 0;
 }
@@ -779,6 +779,7 @@ border-radius: 4px; }
   -o-transition: width 0.2s;
   -ms-transition: width 0.2s;
   transition: width 0.2s;
+  position: relative;
 }
 .contacts ::-webkit-scrollbar {
   width: 7px;
@@ -804,6 +805,27 @@ border-radius: 4px; }
 .contacts.loading {
   background-color: #ececec;
 }
+.contacts .settings {
+  opacity: 0;
+  -moz-filter: alpha(opacity=0);
+  -o-filter: alpha(opacity=0);
+  -webkit-filter: alpha(opacity=0);
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  cursor: pointer;
+  position: absolute;
+  left: -35px;
+  top: -15px;
+  z-index: 5;
+  font-size: 2em;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+  color: #5d5d5d;
+  text-shadow: 0px 0px 5px rgba(254,207,35,0.5);
+}
 .contacts .body {
   position: relative;
   height: 100%;
@@ -823,6 +845,15 @@ border-radius: 4px; }
   -webkit-filter: alpha(opacity=0);
   filter: alpha(opacity=0);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+.contacts:hover .settings {
+  opacity: 1;
+  -ms-filter: none;
+  -moz-filter: none;
+  -o-filter: none;
+  -webkit-filter: none;
+  filter: none;
+  left: 5px;
 }
 .resizer {
   cursor: ew-resize;
@@ -959,7 +990,7 @@ border-radius: 4px; }
   position: relative;
 }
 .boxes ::-webkit-scrollbar {
-  width: 2px;
+  width: 5px;
 }
 .boxes ::-webkit-scrollbar-track {
   background-color: #54728c;
@@ -984,8 +1015,6 @@ border-radius: 4px; }
   float: left;
   margin: 5px;
   background-color: #ececec;
-  width: 200px;
-  height: 300px;
 }
 .boxes .box .label {
   background-color: #54728c;
@@ -1003,10 +1032,13 @@ border-radius: 4px; }
   padding: 9px 5px 0 0;
 }
 .boxes .box .body {
-  padding: 2px;
+  border-left: 2px solid #dadada;
+  border-right: 2px solid #dadada;
+  border-bottom: 1px solid #ececec;
   overflow: hidden;
   overflow-y: auto;
-  height: 200px;
+  width: 250px;
+  max-height: 300px;
 }
 .boxes .box .body .message {
   margin: 0 0 1px 0;
@@ -1047,6 +1079,32 @@ border-radius: 4px; }
 .boxes .box .body .message .date {
   color: #a0a0a0;
   font-size: 0.8em;
+}
+.boxes .box .bottom {
+  background-color: #fff;
+  border-left: 2px solid #dadada;
+  border-right: 2px solid #dadada;
+  border-bottom: 2px solid #dadada;
+}
+.boxes .box .bottom .input textarea {
+  font-family: inherit;
+  font-size: inherit;
+  resize: none;
+  width: 200px;
+  height: 2em;
+  padding: 10px 0 0 5px;
+  border: none;
+}
+.boxes .box .bottom .enter {
+  float: right;
+  cursor: pointer;
+  background-image: url("/img/send.png");
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  background-size: 100%;
+  margin: 7px 3px 0 0;
+  width: 28px;
+  height: 28px;
 }
 .clear {
   zoom: 1;

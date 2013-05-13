@@ -42,7 +42,7 @@ class api_ctl {
       $contacts[$contact->id(true)] = $contact->data();
     }
 
-    $html = jade::c('_contacts', ['contacts' => $contacts], true);
+    $html = jade::c('_contact', ['contacts' => $contacts], true);
 
     echo json_encode(['success' => true, 'contacts' => $contacts, 'html' => $html], JSON_PRETTY_PRINT);
     return true;
@@ -56,19 +56,20 @@ class api_ctl {
       return false;
     }
 
-    if (!$this->user->tokenExpires() < 0) {
+    if ($this->user->tokenExpires() < 0) {
 
-      if (isset($this->user->refresh_token) && $this->user->refresh_token != false) {
+      $goo = new google();
 
-        $goo = new google();
+      if (isset($this->user->refresh_token) && $this->user->refresh_token != null) {
+
         $results = $goo->refresh($this->user->refresh_token);
         $this->user->access_token = $results['access_token'];
         $this->user->access_token_expires = time() + $results['expires_in'];
         $this->user->save();
 
       } else {
-        echo json_encode(['error' => 'access_token expired and no refresh_token found']);
-        return false;
+        Header('Location: '.$goo->authURL('contactsImport', $this->user->email));
+        return true;
       }
 
     }

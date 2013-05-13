@@ -35,16 +35,16 @@ class google {
 
 
   // compile the url for the user to authorize us
-  public function authURL() {
+  public function authURL($state=false, $hint=false) {
 
     $params = [
       'response_type' => 'code',
       //'access_type' => 'offline',
       'client_id' => self::$client_id,
       'redirect_uri' => self::$redirect_uri,
-      'scope' => implode(' ', self::$scope)
-      //'state' => 'parameter' // google roundtrips this 
-      //'login_hint' => 'username@gmail.com' // hint at which account we want
+      'scope' => implode(' ', self::$scope),
+      'state' => $state, // google roundtrips this 
+      'login_hint' => $hint // hint at which account we want
     ];
 
     return self::$url_auth.'?'.http_build_query($params);

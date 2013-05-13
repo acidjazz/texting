@@ -1,11 +1,12 @@
-
-each contact,index in contacts
-  .contact(data-id=index,title=contact.name)
-    .picture
-      if contact.picture
-        img(src='/img/pictures/' + contact.picture['$id'] + '.jpeg')
-      else
-        .default
-          .top
-          .bottom
-    .name #{contact.name}
+.contacts.loading
+  .resizer(data-for='.contacts').hint--right(data-hint='click to drag or double click to minimize/restore')
+    .ghost
+    .handle
+      .dot  &middot
+      .dot  &middot
+      .dot  &middot
+  .body.loading
+    include _loader
+    .clear
+  .settings.hint--right(data-hint='contacts settings')
+    span.icon-cog
