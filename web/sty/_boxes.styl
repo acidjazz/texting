@@ -1,3 +1,76 @@
+
 .boxes
-  border 1px solid #00ff00
-  margin 0 0 0 210px
+
+  ::-webkit-scrollbar
+    width 2px
+    opacity 0.5
+    border-radius 5px
+  ::-webkit-scrollbar:hover
+    width 20px
+    opacity 1
+  ::-webkit-scrollbar-track
+    background-color blue1
+    box-shadow inset 1px 1px 5px rgba(0, 0, 0, 0.5)
+  ::-webkit-scrollbar-thumb
+    background linear-gradient(left, #fecf23, #fd9215)
+
+  margin 0 0 0 200px
+  padding 2px
+  position relative
+  &.loading
+    background-color white3
+
+  .box
+    float left
+    margin 5px
+    background-color white3
+    width 200px
+    height 300px
+    .label
+      background-color blue1
+      .name
+        color white1
+        font-size 1.2em
+        padding 5px 0 5px 5px
+      .phone
+        float right
+        color white2
+        font-size 0.8em
+        line-height 1.2em
+        padding 9px 5px 0 0
+    .body
+      padding 2px
+      overflow hidden
+      overflow-y auto
+      height 200px
+
+      .message
+        margin 0 0 1px 0
+        padding 2px
+        background-color white1
+        min-height 40px
+        .picture
+          background-color white3
+          width s = 40px
+          img
+            width s
+            height s
+        &.from
+          text-align right
+          .picture
+            float right
+            margin 0 0 0 5px
+          .copy, .date
+            margin 0 40px 0 0
+        &.to
+          text-align left
+          .picture
+            float left
+            margin 0 5px 0 0
+          .copy, .date
+            margin 0 0 0 40px
+        .date
+          color black2
+          font-size 0.8em
+
+

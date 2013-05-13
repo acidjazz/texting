@@ -50,11 +50,11 @@ var resizer = {
 
     if (resizer.el.width() == '9') {
       resizer.el.css('width', '200px');
-      $('.boxes').css({'margin-left': '210px'});
+      $('.boxes').css({'margin-left': '200px'});
       resizer.el.addClass('scrollable');
     } else {
       resizer.el.css('width', '9px');
-      $('.boxes').css({'margin-left': '19px'});
+      $('.boxes').css({'margin-left': '9px'});
       resizer.el.removeClass('scrollable');
     }
 

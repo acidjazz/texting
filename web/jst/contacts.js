@@ -24,7 +24,7 @@ var contacts = {
       } 
 
       if (response.error) {
-        _.s('Error Imprting Contacts', response.error);
+        _.s('Error Importing Contacts', response.error);
       }
 
     });
@@ -47,6 +47,7 @@ var contacts = {
         user.contacts_import = response.date;
         clearInterval(contacts.interval);
         contacts.loop = false;
+        contacts.load();
         _.s();
       }
 
@@ -58,14 +59,17 @@ var contacts = {
 
   load: function() {
 
+    _.n('loading contacts..', true);
+
     $.get('/api/contactsList', function(response) {
 
       if (response.success) {
 
         $('.contacts').removeClass('loading').addClass('scrollable');
-        $('.contacts .body').html(response.html);
+        $('.contacts .body').html(response.html).removeClass('loading');
         contacts.list = response.contacts;
         contacts.handlers();
+        _.n('contacts loaded', 1);
 
       }
 

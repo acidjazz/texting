@@ -3,28 +3,42 @@
 .notice
   position fixed
   width w = 400px
+  margin-left -(w / 2)px
   background-color white3
   overflow hidden
   left 50%
-  margin-left -(w / 2)px
+  transition all 0.15s
   box-shadow 0 0 0 5px 2px rgba(0, 0, 0, 0.5)
-
-  transition all linear 0.15s
-  transform-origin top
-
-  perspective 1000px
-  transform-style preserve-3d
-  top 0px
   .copy
     color black1
-    font-size 2em
+    font-size 1em
+    height h = 3em
     text-align center;
-    line-height 1.5em
+    line-height h
+
+  .lineloader
+    display block
+    background-color blue4
+    span
+      display block
+      background-color orange1
+      width 40px
+      margin-left 0px
+      height 2px
+      box-shadow 0 0 10px rgba(orange2, 1)
+      animation lineloader 1s ease-in-out infinite alternate
+      height 2px
 
 .notice.off
-  height 0
+  top -50px
   transform rotateX(-90deg)
 
 .notice.on
-  height 3em
+  top 0px
   transform rotateX(0deg)
+
+@keyframes lineloader
+  from
+    margin-left 0px
+  to
+    margin-left 360px

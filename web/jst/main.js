@@ -10,7 +10,9 @@ var _ = {
     // initiate contact import if we haven't yet
     if (user.loggedin && !user.contacts_import) {
       contacts.import();
-    } else {
+    } 
+
+    if (user.loggedin && user.contacts_import) {
       contacts.load();
     }
 
@@ -54,7 +56,7 @@ var _ = {
 
   },
 
-  n: function(copy) {
+  n: function(copy, timeout) {
 
     if (!copy) {
       $('.notice').removeClass('on').addClass('off');
@@ -63,6 +65,10 @@ var _ = {
 
     if (!$('.notice').hasClass('on')) {
       $('.notice').removeClass('off').addClass('on');
+    }
+
+    if (timeout && timeout !== true) {
+      setTimeout(_.n, timeout*1000);
     }
 
     $('.notice .copy').html(copy);
