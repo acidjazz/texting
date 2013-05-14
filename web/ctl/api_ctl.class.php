@@ -68,7 +68,10 @@ class api_ctl {
         $this->user->save();
 
       } else {
-        Header('Location: '.$goo->authURL('contactsImport', $this->user->email));
+        echo json_encode([
+          'error' => 'new token required', 
+          'url' => $goo->authURL('contactsImport', $this->user->email)
+        ]);
         return true;
       }
 
@@ -122,6 +125,38 @@ class api_ctl {
     ]);
 
     return true;
+
+  }
+
+  public function messageImport() {
+
+    if (isset($_POST['user_id']) && isset($_POST['messages'])) {
+
+      message::col()->remove(['user_id' => $_POST['user_id']]);
+
+      $messages = json_decode($_POST['messages'], true);
+
+      foreach ($messages as $message) {
+
+        $mObj = new message();
+        $mObj->user_id = $_POST['user_id'];
+
+        foreach ($message as $k=>$v) {
+          $mObj->$k = $v;
+        }
+
+        $mObj->save();
+      }
+
+      echo json_encode(
+        ['success' => true, 
+        'status' => 'imported '.count($messages).' messages']
+      );
+      return true;
+
+    }
+
+    echo json_encode(['error' => 'invalid parameters']);
 
   }
 

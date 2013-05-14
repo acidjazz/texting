@@ -1,0 +1,5 @@
+<?
+
+class message extends kcol {
+
+}

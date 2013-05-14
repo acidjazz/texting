@@ -5,7 +5,6 @@ each contact,index in contacts
       if contact.picture
         img(src='/img/pictures/' + contact.picture['$id'] + '.jpeg')
       else
-        .default
-          .top
-          .bottom
+        .icon-user
     .name #{contact.name}
+    .clear

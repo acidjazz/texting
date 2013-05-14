@@ -99,9 +99,23 @@ class contactsImport {
             break;
           }
 
+          $phones = [];
+          if (isset($entry['gd$phoneNumber'])) {
+            foreach ($entry['gd$phoneNumber'] as $phone) {
+              $phones[] = $phone['$t'];
+            }
+            $contact->phones = $phones;
+          } else {
+            $currentContacts++;
+          }
+
           if ($currentContacts%2) {
             $this->update($currentContacts*100/$totalContacts, 
               'importing '.$entry['title']['$t']);
+          }
+
+          if (!isset($entry['gd$phoneNumber'])) {
+            break;
           }
 
           $contact->_user_id = $this->user->id();
@@ -117,13 +131,6 @@ class contactsImport {
             $contact->emails = $emails;
           }
 
-          $phones = [];
-          if (isset($entry['gd$phoneNumber'])) {
-            foreach ($entry['gd$phoneNumber'] as $phone) {
-              $phones[] = $phone['$t'];
-            }
-            $contact->phones = $phones;
-          }
 
           $grid = contact::grid();
           foreach ($entry['link'] as $link) {

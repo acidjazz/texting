@@ -24,7 +24,15 @@ var contacts = {
       } 
 
       if (response.error) {
+
+        // probably a token refresh
+        if (response.url) {
+          location.href = response.url;
+          return true;
+        }
+
         _.s('Error Importing Contacts', response.error);
+
       }
 
     });

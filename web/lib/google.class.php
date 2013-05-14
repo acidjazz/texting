@@ -35,7 +35,7 @@ class google {
 
 
   // compile the url for the user to authorize us
-  public function authURL($state=false, $hint=false) {
+  public function authURL($state=null, $hint=null) {
 
     $params = [
       'response_type' => 'code',

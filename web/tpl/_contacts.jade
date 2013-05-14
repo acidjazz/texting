@@ -1,3 +1,4 @@
+
 .contacts.loading
   .resizer(data-for='.contacts').hint--right(data-hint='click to drag or double click to minimize/restore')
     .ghost
@@ -8,5 +9,8 @@
   .body.loading
     include _loader
     .clear
-  .settings.hint--right(data-hint='contacts settings')
-    span.icon-cog
+  .search-button.hint--top(data-hint='search contacts')
+    span.icon-search
+  .groups-button.hint--right(data-hint='filter groups')
+    span.icon-users
+
