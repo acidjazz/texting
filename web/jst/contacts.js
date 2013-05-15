@@ -7,9 +7,7 @@ var contacts = {
   list: {},
 
   handlers: function() {
-
     $('.contacts .contact').dblclick(contacts.select);
-
   },
 
   import: function() {
@@ -80,7 +78,6 @@ var contacts = {
         _.n('contacts loaded', 1);
 
       }
-
 
     });
 
