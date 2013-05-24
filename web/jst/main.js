@@ -16,6 +16,21 @@ var _ = {
       contacts.load();
     }
 
+    setTimeout(function() { $('.profile .left').removeClass('loading'); }, 1000);
+
+    // resizer our contact list to fit the screen
+    _.size();
+
+    $(window).resize(_.size);
+   
+  },
+
+  size: function() {
+
+    // resize our body
+    var height = $(window).height() - ($('.header').outerHeight() + 2); 
+    $('.contacts .body, .contacts .resizer').css({height: height + 'px'});
+
   },
 
   // overlay status/progress modal
@@ -24,6 +39,7 @@ var _ = {
       $('.smodal').addClass('off').removeClass('on');
       $('.body').removeClass('focus');
       $('.overlay').removeClass('on').addClass('off');
+      $('.smodal .progress span').css({width: '0px'});
       return true;
     }
 
@@ -41,7 +57,7 @@ var _ = {
     if (progress) {
       $('.smodal .progress .copy').html(progress + '%');
 
-      $('.smodal .progress span').css({'width':(350*progress/100) + 'px'});
+      $('.smodal .progress span').css({width: (350*progress/100) + 'px'});
       if (!$('.progress').hasClass('on')) {
         $('.progress').removeClass('off').addClass('on');
       }
@@ -56,6 +72,7 @@ var _ = {
 
   },
 
+  // notice
   n: function(copy, timeout) {
 
     if (!copy) {

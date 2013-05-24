@@ -1,23 +1,13 @@
 .box
   .label
-    .phone 949 290 8989
+    .controls
+      .bbutton(title='close')
+        span.icon-cancel
     .name Troy Sheets
+    .phone 949 290 8989
     .clear
   .body
-    .message.from
-      .picture
-        img(src='/img/pictures/5192bf7a4b765e4652000145-40-40.jpeg')
-      .copy this is a test
-      .date 2 hours ago
-    .message.to
-      .picture
-        img(src='https://lh6.googleusercontent.com/-G6NOOtsjrAw/AAAAAAAAAAI/AAAAAAAABGw/JXCJ8ridVT8/photo.jpg')
-      .copy this is another test p
-        |  this is another test
-        |  this is another test
-        |  this is another test
-        |  this is another test
-      .date 3 hours ago
+    include _loader
   .bottom
     .input
       textarea.blured(type='text',placeholder='Type message')

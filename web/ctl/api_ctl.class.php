@@ -36,6 +36,11 @@ class api_ctl {
 
   private function _contactsList() {
 
+    if ($this->user->contacts_import_percent != null) {
+      echo json_encode(['error' => 'import in progress', 'importAlready' => true]);
+      return false;
+    }
+
     $contacts = [];
     foreach (contact::find(['_user_id' => $this->user->id()]) as $c) {
       $contact = contact::i($c);
@@ -78,7 +83,7 @@ class api_ctl {
     }
 
     if ($this->user->contacts_import_percent != null) {
-      echo json_encode(['error' => 'import already in progress']);
+      echo json_encode(['error' => 'import in progress', 'importAlready' => true]);
       return false;
     }
 

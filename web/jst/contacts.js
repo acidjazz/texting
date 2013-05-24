@@ -11,12 +11,23 @@ var contacts = {
     $('.contacts .search-button').click(contacts.search.toggle);
     $('.contacts .search .close').click(contacts.search.close);
     $('.contacts .search input').keyup(contacts.search.keyup);
+    $('.header .profile .tools .re-import').click(contacts.import);
   },
 
   search: {
 
     toggle: function() {
-      $('.contacts .search, .contacts .search-button').toggleClass('on');
+
+      var swtch = $('.contacts .search, .contacts .search-button');
+      
+      if (!swtch.hasClass('on')) {
+        swtch.addClass('on');
+        $('.search input').val('').focus();
+        return true;
+      }
+
+      swtch.removeClass('on');
+
     },
 
     keyup: function(e) {
@@ -83,6 +94,12 @@ var contacts = {
           return true;
         }
 
+        // possible import already in progress
+        if (response.importAlready) {
+          contacts.loop = true;
+          contacts.interval = setInterval(contacts.progress, 100);
+        }
+
         _.s('Error Importing Contacts', response.error);
 
       }
@@ -131,6 +148,12 @@ var contacts = {
         contacts.handlers();
         _.n('contacts loaded', 1);
 
+      }
+
+      if (response.error && response.importAlready) {
+        _.s('import in progress..');
+        contacts.loop = true;
+        contacts.interval = setInterval(contacts.progress, 100);
       }
 
     });

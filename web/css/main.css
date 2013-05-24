@@ -809,28 +809,54 @@ border-radius: 4px; }
   color: #fff;
   margin: 5px 0 0 0;
 }
-.header .hbutton {
-  cursor: pointer;
+.header .tools {
+  z-index: 1;
   border: 2px solid #466077;
   -webkit-border-radius: 5px;
   border-radius: 5px;
   background-color: #708ba6;
-  padding: 5px 12px;
+  margin: 5px 0 0 -20px;
+  float: right;
+  padding: 0 5px 0 15px;
 }
-.header .hbutton > a {
+.header .hbutton {
+  cursor: pointer;
+  padding: 5px;
+  font-size: 1.2em;
+  float: left;
+}
+.header .hbutton a {
   color: #fff;
   text-decoration: none;
 }
-.header > .profile {
+.header .hbutton:hover,
+.header .hbutton a:hover {
+  color: #fecf23;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+  text-shadow: 0px 0px 5px rgba(253,146,21,0.5);
+}
+.header > .profile .left {
+  z-index: 2;
   float: right;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  transition: all 0.5s;
+  margin: 0 -75px 0 0;
 }
-.header > .profile > .name {
+.header > .profile .left > .name {
   float: left;
-  margin: 10px 0 0 0;
+  margin: 5px -5px 0 0;
   font-size: 1.3em;
-  padding: 0 5px;
+  padding: 7px;
+  background-color: #54728c;
 }
-.header > .profile > .picture {
+.header > .profile .left > .picture {
   float: right;
   width: 40px;
   height: 40px;
@@ -839,17 +865,15 @@ border-radius: 4px; }
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
-.header > .profile > .picture img {
+.header > .profile .left > .picture img {
   width: inherit;
   height: inherit;
 }
-.header > .profile > .tools {
-  float: right;
-  margin: 0 0 0 -10px;
+.header > .profile .left.loading {
+  margin: 0;
 }
-.header > .profile > .tools > .logout {
-  text-align: center;
-  margin: 6px 0 0 0;
+.header .profile:hover .left {
+  margin: 0;
 }
 .contacts {
   float: left;
@@ -934,7 +958,6 @@ border-radius: 4px; }
   -webkit-filter: alpha(opacity=0);
   filter: alpha(opacity=0);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  border-bottom: 1px solid #dadada;
   background-color: #ececec;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -944,6 +967,9 @@ border-radius: 4px; }
   font-size: 1.2em;
   padding: 0 5px;
   overflow: hidden;
+  -webkit-box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.8);
+  -moz-box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.8);
+  box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.8);
 }
 .contacts .search input {
   outline: none;
@@ -1132,82 +1158,125 @@ border-radius: 4px; }
 .boxes.loading {
   background-color: #ececec;
 }
-.boxes .box {
-  float: left;
+.boxes >.box {
   margin: 5px;
+  width: 250px;
+  float: left;
   background-color: #ececec;
 }
-.boxes .box .label {
-  background-color: #54728c;
+.boxes >.box:hover .label .controls .bbutton {
+  opacity: 0.9;
+  -moz-filter: alpha(opacity=90);
+  -o-filter: alpha(opacity=90);
+  -webkit-filter: alpha(opacity=90);
+  filter: alpha(opacity=90);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
 }
-.boxes .box .label .name {
-  color: #fff;
+.boxes >.box .label {
+  background-color: #54728c;
   font-size: 1.2em;
+}
+.boxes >.box .label .controls {
+  float: right;
+}
+.boxes >.box .label .controls .bbutton {
+  cursor: pointer;
+  padding: 5px;
+  color: #fff;
+  opacity: 0;
+  -moz-filter: alpha(opacity=0);
+  -o-filter: alpha(opacity=0);
+  -webkit-filter: alpha(opacity=0);
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.boxes >.box .label .controls .bbutton:hover {
+  color: #fecf23;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+  text-shadow: 0px 0px 5px rgba(253,146,21,0.5);
+}
+.boxes >.box .label .name {
+  float: left;
+  color: #fff;
   padding: 5px 0 5px 5px;
 }
-.boxes .box .label .phone {
-  float: right;
+.boxes >.box .label .phone {
+  float: left;
   color: #f9f9f9;
   font-size: 0.8em;
-  line-height: 1.2em;
   padding: 9px 5px 0 0;
+  padding: 7px 0 0 7px;
 }
-.boxes .box .body {
+.boxes >.box .body {
   border-left: 2px solid #dadada;
   border-right: 2px solid #dadada;
   border-bottom: 1px solid #ececec;
   overflow: hidden;
   overflow-y: auto;
-  width: 250px;
   height: 300px;
+  position: relative;
 }
-.boxes .box .body .message {
+.boxes >.box .body .message {
   margin: 0 0 1px 0;
   padding: 2px;
   background-color: #fff;
   min-height: 40px;
 }
-.boxes .box .body .message .picture {
+.boxes >.box .body .message .picture {
   background-color: #ececec;
   width: 40px;
 }
-.boxes .box .body .message .picture img {
+.boxes >.box .body .message .picture img {
   width: 40px;
   height: 40px;
 }
-.boxes .box .body .message.from {
+.boxes >.box .body .message.from {
   text-align: right;
 }
-.boxes .box .body .message.from .picture {
+.boxes >.box .body .message.from .picture {
   float: right;
   margin: 0 0 0 5px;
 }
-.boxes .box .body .message.from .copy,
-.boxes .box .body .message.from .date {
+.boxes >.box .body .message.from .copy,
+.boxes >.box .body .message.from .date {
   margin: 0 40px 0 0;
 }
-.boxes .box .body .message.to {
+.boxes >.box .body .message.to {
   text-align: left;
 }
-.boxes .box .body .message.to .picture {
+.boxes >.box .body .message.to .picture {
   float: left;
   margin: 0 5px 0 0;
 }
-.boxes .box .body .message.to .copy,
-.boxes .box .body .message.to .date {
+.boxes >.box .body .message.to .copy,
+.boxes >.box .body .message.to .date {
   margin: 0 0 0 40px;
 }
-.boxes .box .body .message .date {
+.boxes >.box .body .message .date {
   color: #a0a0a0;
   font-size: 0.8em;
 }
-.boxes .box .bottom {
+.boxes >.box .bottom {
   background-color: #fff;
   border-left: 2px solid #dadada;
   border-right: 2px solid #dadada;
   border-bottom: 2px solid #dadada;
 }
-.boxes .box .bottom .input textarea {
+.boxes >.box .bottom .input textarea {
   font-family: inherit;
   font-size: inherit;
   resize: none;
@@ -1217,7 +1286,7 @@ border-radius: 4px; }
   border: none;
   outline: none;
 }
-.boxes .box .bottom .enter {
+.boxes >.box .bottom .enter {
   float: right;
   cursor: pointer;
   background-image: url("/img/send.png");

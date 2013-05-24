@@ -1,7 +1,10 @@
 .profile
-  .name #{user.name}
   .tools
-    .hbutton.logout
-      a(href='/auth/logout') logout 
-  .picture
-    img(src=user.picture)
+    .hbutton(title='re-import your contacts')
+      span.icon-arrows-cw.re-import
+    .hbutton(title='log out')
+      a(href='/auth/logout'): span.icon-off
+  .left.loading
+    .name #{user.name}
+    .picture
+      img(src=user.picture)

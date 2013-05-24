@@ -56,6 +56,7 @@ var resizer = {
       resizer.el.css('width', '9px');
       $('.boxes').css({'margin-left': '9px'});
       resizer.el.removeClass('scrollable');
+      contacts.search.close();
     }
 
 

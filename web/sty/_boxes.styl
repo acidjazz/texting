@@ -16,30 +16,45 @@
   &.loading
     background-color white3
 
-  .box
-    float left
+  >.box
     margin 5px
+    width 250px
+    float left
     background-color white3
+    &:hover .label .controls .bbutton
+      opacity 0.9
+      transition all 0.2s
     .label
       background-color blue1
+      font-size 1.2em
+      .controls
+        float right
+        .bbutton
+          cursor pointer
+          padding 5px
+          color white1
+          opacity 0
+          transition all 0.2s
+          &:hover
+            buttonhover()
       .name
+        float left
         color white1
-        font-size 1.2em
         padding 5px 0 5px 5px
       .phone
-        float right
+        float left
         color white2
         font-size 0.8em
-        line-height 1.2em
         padding 9px 5px 0 0
+        padding 7px 0 0 7px
     .body
       border-left 2px solid white4
       border-right 2px solid white4
       border-bottom 1px solid white3
       overflow hidden
       overflow-y auto
-      width 250px
       height 300px
+      position relative
       .message
         margin 0 0 1px 0
         padding 2px
