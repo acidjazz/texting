@@ -147,6 +147,7 @@ var contacts = {
         contacts.list = response.contacts;
         contacts.handlers();
         _.n('contacts loaded', 1);
+        box.i();
 
       }
 
@@ -162,6 +163,7 @@ var contacts = {
 
   select: function() {
 
+    box.spawn($(this).data('id'));
 
   }
 

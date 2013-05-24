@@ -1,10 +1,10 @@
-.box
+.box(id='box_'+contact._id['$id'])
   .label
     .controls
-      .bbutton(title='close')
+      .bbutton.destroy(title='close')
         span.icon-cancel
-    .name Troy Sheets
-    .phone 949 290 8989
+    .name #{contact.name}
+    .phone #{contact.phones[0]}
     .clear
   .body
     include _loader

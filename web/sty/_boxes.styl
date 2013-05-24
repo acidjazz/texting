@@ -10,8 +10,9 @@
     border-radius 2px
     background linear-gradient(left, #fecf23, #fd9215)
 
+  overflow auto
   margin 0 0 0 200px
-  padding 2px
+  padding 2px 2px 0 2px
   position relative
   &.loading
     background-color white3
@@ -21,9 +22,18 @@
     width 250px
     float left
     background-color white3
-    &:hover .label .controls .bbutton
-      opacity 0.9
+    overflow hidden
+    transition all 1.8s
+    &.glow
+      box-shadow 0 0 5px 1px rgba(orange2, 1)
       transition all 0.2s
+    &.closing
+      opacity 0
+      transition all 0.2s
+    &:hover .label .controls .bbutton
+      margin 0
+      transition all 0.2s
+      transform rotate(180deg)
     .label
       background-color blue1
       font-size 1.2em
@@ -33,20 +43,18 @@
           cursor pointer
           padding 5px
           color white1
-          opacity 0
           transition all 0.2s
+          margin 0 -35px 0 0
+          font-size 1.5em
           &:hover
             buttonhover()
       .name
-        float left
         color white1
-        padding 5px 0 5px 5px
+        padding 5px 0 0 10px
       .phone
-        float left
-        color white2
-        font-size 0.8em
-        padding 9px 5px 0 0
-        padding 7px 0 0 7px
+        color white4
+        font-size 0.7em
+        padding 0 0 5px 10px
     .body
       border-left 2px solid white4
       border-right 2px solid white4

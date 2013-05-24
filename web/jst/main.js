@@ -29,7 +29,7 @@ var _ = {
 
     // resize our body
     var height = $(window).height() - ($('.header').outerHeight() + 2); 
-    $('.contacts .body, .contacts .resizer').css({height: height + 'px'});
+    $('.contacts .body, .contacts .resizer, .boxes').css({height: height + 'px'});
 
   },
 
