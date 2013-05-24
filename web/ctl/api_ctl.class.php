@@ -56,11 +56,6 @@ class api_ctl {
 
   private function _contactsImport() {
 
-    if (!$this->loggedIn()) {
-      echo json_encode(['error' => 'user not logged in']);
-      return false;
-    }
-
     if ($this->user->tokenExpires() < 0) {
 
       $goo = new google();
@@ -162,6 +157,15 @@ class api_ctl {
     }
 
     echo json_encode(['error' => 'invalid parameters']);
+
+  }
+
+  private function _messageHistory($id) {
+
+    sleep(rand(1,2));
+    $html = jade::c('_box_sample', [], true);
+    echo json_encode(['success' => true, 'html' => $html]);
+    return true;
 
   }
 

@@ -1,0 +1,31 @@
+
+.mloader
+  width 30px
+  height 30px
+  border-radius 50%
+  position absolute
+  left 100%
+  top 100%
+  margin -30px 0 0 -30px
+  .dot
+    width 4px
+    height 4px
+    background blue1
+    position absolute
+    border-radius 50%
+    left 14px
+    top 2px
+    transform-origin 0 13px
+    animation dot 2s ease-out infinite 
+  .two
+    animation-delay 150ms
+  .three
+    animation-delay 280ms
+  .four
+    animation-delay 500ms
+
+@keyframes dot
+  0%
+    transform rotateZ(0deg)
+  100%
+    transform rotateZ(360deg)

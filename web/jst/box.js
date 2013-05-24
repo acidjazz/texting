@@ -50,10 +50,25 @@ var box = {
         $('.boxes').html(html + response.html + box.clear);
         _.n();
         box.handlers();
+        box.history(id);
       } else {
         _.n('error loading contact : ' + response.error);
       }
 
+    });
+
+  },
+
+
+  history: function(id) {
+
+    $.get('/api/messageHistory/' + id, function(response) {
+
+
+      if (response.success) {
+        console.log(response.html);
+        $('#box_' + id + ' .body').html(response.html);
+      }
 
     });
 
