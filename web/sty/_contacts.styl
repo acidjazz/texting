@@ -44,7 +44,7 @@
   .search
     height 0px
     opacity 0
-    background-color white3
+    background-color white1
     transition all 0.2s
     font-size 1.2em
     padding 0 5px
@@ -58,6 +58,10 @@
       font-family inherit
       font-size inherit
       width 135px
+      &::-webkit-input-placeholder
+        color black2
+      &::-moz-placeholder
+        color black2
     &.on
       height 30px
       opacity 1
@@ -69,10 +73,11 @@
       float right
       margin 4px 0 0 0
       cursor pointer
-      color white3
+      color white1
       transition color 0.2s
       &.on
         color black1
+        transition color 0.2s
 
 .contacts:hover .search-button, .contacts .search-button.on
   opacity 1

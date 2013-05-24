@@ -5,8 +5,11 @@ var box = {
 
   i: function() {
 
+    _.n('loading boxes..');
+
     setTimeout(function() {
       $('.boxes').removeClass('loading').html('');
+      _.n();
     }, 1000);
 
     box.handlers();

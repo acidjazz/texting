@@ -958,7 +958,7 @@ border-radius: 4px; }
   -webkit-filter: alpha(opacity=0);
   filter: alpha(opacity=0);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  background-color: #ececec;
+  background-color: #fff;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
@@ -980,6 +980,12 @@ border-radius: 4px; }
   font-size: inherit;
   width: 135px;
 }
+.contacts .search input::-webkit-input-placeholder {
+  color: #a0a0a0;
+}
+.contacts .search input::-moz-placeholder {
+  color: #a0a0a0;
+}
 .contacts .search.on {
   height: 30px;
   opacity: 1;
@@ -997,7 +1003,7 @@ border-radius: 4px; }
   float: right;
   margin: 4px 0 0 0;
   cursor: pointer;
-  color: #ececec;
+  color: #fff;
   -webkit-transition: color 0.2s;
   -moz-transition: color 0.2s;
   -o-transition: color 0.2s;
@@ -1006,6 +1012,11 @@ border-radius: 4px; }
 }
 .contacts .search .close.on {
   color: #5d5d5d;
+  -webkit-transition: color 0.2s;
+  -moz-transition: color 0.2s;
+  -o-transition: color 0.2s;
+  -ms-transition: color 0.2s;
+  transition: color 0.2s;
 }
 .contacts:hover .search-button,
 .contacts .search-button.on {
@@ -1308,6 +1319,13 @@ border-radius: 4px; }
   padding: 10px 0 0 5px;
   border: none;
   outline: none;
+  color: #5d5d5d;
+}
+.boxes >.box .bottom .input textarea::-webkit-input-placeholder {
+  color: #a0a0a0;
+}
+.boxes >.box .bottom .input textarea::-moz-placeholder {
+  color: #a0a0a0;
 }
 .boxes >.box .bottom .enter {
   float: right;
