@@ -206,10 +206,14 @@ class api_ctl {
 
     }
 
-    $html = jade::c('_box_body', ['messages' => $msgs], true);
+
+    if (count($msgs) < 1) {
+      $html = jade::c('_box_body_none', [], true);
+    } else {
+      $html = jade::c('_box_body', ['messages' => $msgs], true);
+    }
 
     echo json_encode(['success' => true, 'html' => $html]);
-
 
     return true;
 

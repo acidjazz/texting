@@ -1064,36 +1064,7 @@ border-radius: 4px; }
   filter: alpha(opacity=0);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 }
-.contacts .search-button,
-.contacts .groups-button {
-  opacity: 0;
-  -moz-filter: alpha(opacity=0);
-  -o-filter: alpha(opacity=0);
-  -webkit-filter: alpha(opacity=0);
-  filter: alpha(opacity=0);
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  cursor: pointer;
-  position: absolute;
-  left: -35px;
-  top: 0px;
-  z-index: 5;
-  font-size: 1.5em;
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -o-transition: all 0.2s;
-  -ms-transition: all 0.2s;
-  transition: all 0.2s;
-  color: #5d5d5d;
-  text-shadow: 0px 0px 5px rgba(84,114,140,0.5);
-}
 .contacts .search {
-  height: 0px;
-  opacity: 0;
-  -moz-filter: alpha(opacity=0);
-  -o-filter: alpha(opacity=0);
-  -webkit-filter: alpha(opacity=0);
-  filter: alpha(opacity=0);
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   background-color: #fff;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -1101,20 +1072,24 @@ border-radius: 4px; }
   -ms-transition: all 0.2s;
   transition: all 0.2s;
   font-size: 1.2em;
-  padding: 0 5px;
+  padding: 2px 5px;
   overflow: hidden;
   -webkit-box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.8);
   -moz-box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.8);
   box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.8);
 }
+.contacts .search .icon {
+  float: left;
+}
 .contacts .search input {
+  display: block;
   outline: none;
-  margin: 3px 0 0 23px;
+  float: left;
+  width: 135px;
   border: none;
   background-color: inherit;
   font-family: inherit;
   font-size: inherit;
-  width: 135px;
 }
 .contacts .search input::-webkit-input-placeholder {
   color: #a0a0a0;
@@ -1130,10 +1105,6 @@ border-radius: 4px; }
   -o-filter: none;
   -webkit-filter: none;
   filter: none;
-}
-.contacts .search .icon-search {
-  float: left;
-  margin: 4px 0 0 0;
 }
 .contacts .search .close {
   float: right;
@@ -1153,16 +1124,6 @@ border-radius: 4px; }
   -o-transition: color 0.2s;
   -ms-transition: color 0.2s;
   transition: color 0.2s;
-}
-.contacts:hover .search-button,
-.contacts .search-button.on {
-  opacity: 1;
-  -ms-filter: none;
-  -moz-filter: none;
-  -o-filter: none;
-  -webkit-filter: none;
-  filter: none;
-  left: 0px;
 }
 .resizer {
   cursor: ew-resize;
@@ -1303,30 +1264,33 @@ border-radius: 4px; }
   background: -ms-linear-gradient(left, #fecf23 0%, #fd9215 100%);
   background: linear-gradient(left, #fecf23 0%, #fd9215 100%);
 }
-.boxes >.box {
+.boxes.loading {
+  background-color: #ececec;
+}
+.boxes > .box {
   margin: 5px;
   width: 250px;
   float: left;
   background-color: #ececec;
   overflow: hidden;
-  -webkit-transition: glow 1.8s;
-  -moz-transition: glow 1.8s;
-  -o-transition: glow 1.8s;
-  -ms-transition: glow 1.8s;
-  transition: glow 1.8s;
+  -webkit-transition: all 1.8s;
+  -moz-transition: all 1.8s;
+  -o-transition: all 1.8s;
+  -ms-transition: all 1.8s;
+  transition: all 1.8s;
   border: 1px solid #ececec;
 }
-.boxes >.box.glow {
+.boxes > .box.glow {
   -webkit-box-shadow: 0 0 5px 1px #fd9215;
   -moz-box-shadow: 0 0 5px 1px #fd9215;
   box-shadow: 0 0 5px 1px #fd9215;
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -o-transition: all 0.2s;
-  -ms-transition: all 0.2s;
-  transition: all 0.2s;
+  -webkit-transition: box-shadow 0.2s;
+  -moz-transition: box-shadow 0.2s;
+  -o-transition: box-shadow 0.2s;
+  -ms-transition: box-shadow 0.2s;
+  transition: box-shadow 0.2s;
 }
-.boxes >.box.closing {
+.boxes > .box.closing {
   opacity: 0;
   -moz-filter: alpha(opacity=0);
   -o-filter: alpha(opacity=0);
@@ -1339,48 +1303,21 @@ border-radius: 4px; }
   -ms-transition: all 0.2s;
   transition: all 0.2s;
 }
-.boxes >.box:hover .label .controls .bbutton {
-  margin: 0;
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -o-transition: all 0.2s;
-  -ms-transition: all 0.2s;
-  transition: all 0.2s;
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
-.boxes >.box:hover,
-.boxes >.box.focused {
-  border: 1px solid #54728c;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  -ms-transition: none;
-  transition: none;
-}
-.boxes >.box .label {
+.boxes > .box .label {
   background-color: #54728c;
   font-size: 1.2em;
+  border-bottom: 2px solid #466176;
 }
-.boxes >.box .label .controls {
+.boxes > .box .label .controls {
   float: right;
 }
-.boxes >.box .label .controls .bbutton {
+.boxes > .box .label .controls .bbutton {
   cursor: pointer;
   padding: 5px;
   color: #fff;
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -o-transition: all 0.2s;
-  -ms-transition: all 0.2s;
-  transition: all 0.2s;
-  margin: 0 -35px 0 0;
-  font-size: 1.5em;
+  font-size: 1em;
 }
-.boxes >.box .label .controls .bbutton:hover {
+.boxes > .box .label .controls .bbutton:hover {
   color: #fecf23;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -1389,16 +1326,16 @@ border-radius: 4px; }
   transition: all 0.2s;
   text-shadow: 0px 0px 5px rgba(253,146,21,0.5);
 }
-.boxes >.box .label .name {
+.boxes > .box .label .name {
   color: #fff;
   padding: 5px 0 0 10px;
 }
-.boxes >.box .label .phone {
+.boxes > .box .label .phone {
   color: #dadada;
   font-size: 0.7em;
   padding: 0 0 5px 10px;
 }
-.boxes >.box .body {
+.boxes > .box .body {
   border-left: 2px solid #dadada;
   border-right: 2px solid #dadada;
   border-bottom: 1px solid #ececec;
@@ -1406,61 +1343,73 @@ border-radius: 4px; }
   overflow-y: auto;
   height: 300px;
   position: relative;
+  background-color: #fff;
 }
-.boxes >.box .body .wrapper {
+.boxes > .box .body .none {
+  text-align: center;
+  font-size: 0.8em;
+  color: #dadada;
+  font-style: italic;
+  padding: 5px;
+}
+.boxes > .box .body.loading {
+  background-color: #ececec;
+}
+.boxes > .box .body .wrapper {
   display: table-cell;
   vertical-align: bottom;
+  width: 250px;
   height: 300px;
 }
-.boxes >.box .body .message {
+.boxes > .box .body .message {
   margin: 0 0 1px 0;
   padding: 2px;
   background-color: #fff;
   min-height: 40px;
 }
-.boxes >.box .body .message .picture {
+.boxes > .box .body .message .picture {
   background-color: #ececec;
   width: 40px;
   height: 40px;
   font-size: 2em;
 }
-.boxes >.box .body .message .picture img {
+.boxes > .box .body .message .picture img {
   width: 40px;
   height: 40px;
 }
-.boxes >.box .body .message.from {
+.boxes > .box .body .message.from {
   text-align: right;
 }
-.boxes >.box .body .message.from .picture {
+.boxes > .box .body .message.from .picture {
   float: right;
   margin: 0 0 0 5px;
 }
-.boxes >.box .body .message.from .copy,
-.boxes >.box .body .message.from .date {
+.boxes > .box .body .message.from .copy,
+.boxes > .box .body .message.from .date {
   margin: 0 40px 0 0;
 }
-.boxes >.box .body .message.to {
+.boxes > .box .body .message.to {
   text-align: left;
 }
-.boxes >.box .body .message.to .picture {
+.boxes > .box .body .message.to .picture {
   float: left;
   margin: 0 5px 0 0;
 }
-.boxes >.box .body .message.to .copy,
-.boxes >.box .body .message.to .date {
+.boxes > .box .body .message.to .copy,
+.boxes > .box .body .message.to .date {
   margin: 0 0 0 40px;
 }
-.boxes >.box .body .message .date {
+.boxes > .box .body .message .date {
   color: #a0a0a0;
   font-size: 0.8em;
 }
-.boxes >.box .bottom {
+.boxes > .box .bottom {
   background-color: #fff;
   border-left: 2px solid #dadada;
   border-right: 2px solid #dadada;
   border-bottom: 2px solid #dadada;
 }
-.boxes >.box .bottom .input textarea {
+.boxes > .box .bottom .input textarea {
   font-family: inherit;
   font-size: inherit;
   resize: none;
@@ -1471,13 +1420,13 @@ border-radius: 4px; }
   outline: none;
   color: #5d5d5d;
 }
-.boxes >.box .bottom .input textarea::-webkit-input-placeholder {
+.boxes > .box .bottom .input textarea::-webkit-input-placeholder {
   color: #a0a0a0;
 }
-.boxes >.box .bottom .input textarea::-moz-placeholder {
+.boxes > .box .bottom .input textarea::-moz-placeholder {
   color: #a0a0a0;
 }
-.boxes >.box .bottom .enter {
+.boxes > .box .bottom .enter {
   float: right;
   cursor: pointer;
   background-image: url("/img/send.png");

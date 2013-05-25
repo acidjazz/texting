@@ -28,7 +28,7 @@ var _ = {
   size: function() {
 
     // resize our body
-    var height = $(window).height() - ($('.header').outerHeight() + 2); 
+    var height = $(window).height() - ($('.header').outerHeight() + 30); 
     $('.contacts .body, .contacts .resizer, .boxes').css({height: height + 'px'});
 
   },

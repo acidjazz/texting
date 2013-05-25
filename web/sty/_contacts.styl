@@ -29,35 +29,24 @@
       .name
         opacity 0
 
-  .search-button, .groups-button
-    opacity 0
-    cursor pointer
-    position absolute
-    left -35px
-    top 0px
-    z-index 5
-    font-size 1.5em
-    transition all 0.2s
-    color black1
-    text-shadow 0px 0px 5px rgba(blue1, 0.5)
-
   .search
-    height 0px
-    opacity 0
     background-color white1
     transition all 0.2s
     font-size 1.2em
-    padding 0 5px
+    padding 2px 5px
     overflow hidden
     box-shadow inset 0px 0px 3px 0px rgba(0, 0, 0, 0.8)
+    .icon
+      float left
     input
+      display block
       outline none
-      margin 3px 0 0 23px
+      float left
+      width 135px
       border none
       background-color inherit
       font-family inherit
       font-size inherit
-      width 135px
       &::-webkit-input-placeholder
         color black2
       &::-moz-placeholder
@@ -65,10 +54,6 @@
     &.on
       height 30px
       opacity 1
-
-    .icon-search
-      float left
-      margin 4px 0 0 0
     .close
       float right
       margin 4px 0 0 0
@@ -78,10 +63,6 @@
       &.on
         color black1
         transition color 0.2s
-
-.contacts:hover .search-button, .contacts .search-button.on
-  opacity 1
-  left 0px
 
 /*
 .contacts:hover .groups-button

@@ -14,40 +14,34 @@
   margin 0 0 0 200px
   padding 2px 2px 0 2px
   position relative
+  &.loading
+    background-color white3
 
-  >.box
+  > .box
     margin 5px
     width 250px
     float left
     background-color white3
     overflow hidden
-    transition glow 1.8s
+    transition all 1.8s
     border 1px solid white3
     &.glow
       box-shadow 0 0 5px 1px rgba(orange2, 1)
-      transition all 0.2s
+      transition box-shadow 0.2s
     &.closing
       opacity 0
       transition all 0.2s
-    &:hover .label .controls .bbutton
-      margin 0
-      transition all 0.2s
-      transform rotate(180deg)
-    &:hover, &.focused
-      border 1px solid blue1
-      transition none
     .label
       background-color blue1
       font-size 1.2em
+      border-bottom 2px solid blue4
       .controls
         float right
         .bbutton
           cursor pointer
           padding 5px
           color white1
-          transition all 0.2s
-          margin 0 -35px 0 0
-          font-size 1.5em
+          font-size 1em
           &:hover
             buttonhover()
       .name
@@ -65,9 +59,19 @@
       overflow-y auto
       height 300px
       position relative
+      background-color white1
+      .none
+        text-align center
+        font-size 0.8em
+        color white4
+        font-style italic
+        padding 5px
+      &.loading
+        background-color white3
       .wrapper
         display table-cell
         vertical-align bottom
+        width 250px
         height 300px
       .message
         margin 0 0 1px 0

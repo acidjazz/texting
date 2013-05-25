@@ -65,7 +65,7 @@ var box = {
     $.get('/api/messageHistory/' + id, function(response) {
 
       if (response.success) {
-        $('#box_' + id + ' .body').html(response.html);
+        $('#box_' + id + ' .body').removeClass('loading').html(response.html);
         box.scroll();
       }
 
@@ -75,7 +75,7 @@ var box = {
 
   scroll: function() {
     var body = $('.box .body');
-    body.scrollTop(body[0].scrollHeight + body.height());
+    body.scrollTop(999999);
   }
 
 }

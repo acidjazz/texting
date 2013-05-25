@@ -8,27 +8,13 @@ var contacts = {
 
   handlers: function() {
     $('.contacts .contact').dblclick(contacts.select);
-    $('.contacts .search-button').click(contacts.search.toggle);
     $('.contacts .search .close').click(contacts.search.close);
     $('.contacts .search input').keyup(contacts.search.keyup);
     $('.header .profile .tools .re-import').click(contacts.import);
+    contacts.search.close();
   },
 
   search: {
-
-    toggle: function() {
-
-      var swtch = $('.contacts .search, .contacts .search-button');
-      
-      if (!swtch.hasClass('on')) {
-        swtch.addClass('on');
-        $('.search input').val('').focus();
-        return true;
-      }
-
-      swtch.removeClass('on');
-
-    },
 
     keyup: function(e) {
 
@@ -68,7 +54,6 @@ var contacts = {
     close: function() {
 
       $('.contacts .search input').val('');
-      $('.contacts .search, .contacts .search-button').removeClass('on');
       contacts.search.reset();
 
     }
