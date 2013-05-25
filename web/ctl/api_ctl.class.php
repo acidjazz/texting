@@ -162,9 +162,55 @@ class api_ctl {
 
   private function _messageHistory($id) {
 
+    $contact = new contact($id);
+
+    if (!$contact->exists() || $contact->_user_id != $this->user->id()) {
+      echo json_encode(['error' => 'contact not found']);
+      return false;
+    }
+
     sleep(rand(1,2));
-    $html = jade::c('_box_sample', [], true);
+
+    $msgs = [];
+    for ($m = rand(0,20); $m != 0; $m--) {
+
+      $msgs[$m]['which'] = (rand(0,1) ? 'from' : 'to');
+
+      if (rand(0,1)) {
+        $msgs[$m]['which'] = 'from';
+
+        if ($contact->picture != null) {
+          $msgs[$m]['picture'] = '/img/pictures/'.$contact->picture->{'$id'}.'-40-40.jpeg';
+        }
+
+      } else {
+
+        if ($this->user->picture != null) {
+          $msgs[$m]['picture'] = $this->user->picture;
+        }
+
+        $msgs[$m]['which'] = 'to';
+
+      }
+
+      $sentence = [];
+
+      for ($s = rand(1, 30); $s != 0; $s--) {
+        $word = '';
+        for ($w = rand(2,10); $w != 0; $w--) {
+          $word .= chr(rand(97, 122));
+        }
+        $sentence[] = $word;
+      }
+      $msgs[$m]['copy'] = implode(' ', $sentence);
+
+    }
+
+    $html = jade::c('_box_body', ['messages' => $msgs], true);
+
     echo json_encode(['success' => true, 'html' => $html]);
+
+
     return true;
 
   }

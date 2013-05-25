@@ -14,8 +14,6 @@
   margin 0 0 0 200px
   padding 2px 2px 0 2px
   position relative
-  &.loading
-    background-color white3
 
   >.box
     margin 5px
@@ -67,6 +65,10 @@
       overflow-y auto
       height 300px
       position relative
+      .wrapper
+        display table-cell
+        vertical-align bottom
+        height 300px
       .message
         margin 0 0 1px 0
         padding 2px
@@ -75,6 +77,8 @@
         .picture
           background-color white3
           width s = 40px
+          height s
+          font-size 2em
           img
             width s
             height s

@@ -48,6 +48,7 @@ var box = {
         var reg = new RegExp(box.clear,'g');
         var html = $('.boxes').html().replace(reg, '');
         $('.boxes').html(html + response.html + box.clear);
+        box.scroll();
         _.n();
         box.handlers();
         box.history(id);
@@ -59,20 +60,22 @@ var box = {
 
   },
 
-
   history: function(id) {
 
     $.get('/api/messageHistory/' + id, function(response) {
 
-
       if (response.success) {
-        console.log(response.html);
         $('#box_' + id + ' .body').html(response.html);
+        box.scroll();
       }
 
     });
 
-  }
+  },
 
+  scroll: function() {
+    var body = $('.box .body');
+    body.scrollTop(body[0].scrollHeight + body.height());
+  }
 
 }
