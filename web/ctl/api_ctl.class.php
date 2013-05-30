@@ -19,6 +19,20 @@ class api_ctl {
     return true;
   }
 
+  public function tokenVerify($token) {
+
+    if (!isset($_REQUEST['token']) || empty($_REQUEST['token'])) {
+      echo json_entoken(['error' => true, 'message' => 'invalid token']);
+      return false;
+    }
+
+    $goo = new google();
+   
+    echo json_encode($goo->tokenVerify($_REQUEST['token']), JSON_PRETTY_PRINT);
+    return true;
+
+  }
+
   public function __call($method, $args) {
 
     if (!$this->loggedIn()) {

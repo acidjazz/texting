@@ -24,12 +24,19 @@
     background-color white3
     overflow hidden
     transition all 1.8s
-    border 1px solid white3
+    border-radius 3px
+    box-sizing border-box
+    border 1px solid black3
+    border-bottom-width 2px
+    border-top-width 0
+    &.maximize
+      width 99%
     &.glow
       box-shadow 0 0 5px 1px rgba(orange2, 1)
       transition box-shadow 0.2s
     &.closing
       opacity 0
+      transform translateX(-30rem) 
       transition all 0.2s
     .label
       background-color blue1
@@ -37,9 +44,13 @@
       border-bottom 2px solid blue4
       .controls
         float right
+        padding 5px 5px 5px 0
+        .restore
+          display none
         .bbutton
+          float right
           cursor pointer
-          padding 5px
+          padding 2px
           color white1
           font-size 1em
           &:hover
@@ -52,14 +63,11 @@
         font-size 0.7em
         padding 0 0 5px 10px
     .body
-      border-left 2px solid white4
-      border-right 2px solid white4
       border-bottom 1px solid white3
       overflow hidden
       overflow-y auto
       height 300px
       position relative
-      background-color white1
       .none
         text-align center
         font-size 0.8em
@@ -67,12 +75,12 @@
         font-style italic
         padding 5px
       &.loading
-        background-color white3
+          background-color white3
       .wrapper
         display table-cell
         vertical-align bottom
-        width 250px
-        height 300px
+        width inherit
+        height inherit
       .message
         margin 0 0 1px 0
         padding 2px
@@ -87,6 +95,10 @@
             width s
             height s
         &.from
+
+          animation fromLeft .5s 0s ease both
+          transform-origin bottom left
+
           text-align right
           .picture
             float right
@@ -94,6 +106,10 @@
           .copy, .date
             margin 0 40px 0 0
         &.to
+
+          animation fromRight .5s 0s ease both
+          transform-origin bottom right
+
           text-align left
           .picture
             float left
@@ -105,9 +121,6 @@
           font-size 0.8em
     .bottom
       background-color white1
-      border-left 2px solid white4
-      border-right 2px solid white4
-      border-bottom 2px solid white4
       .input
         textarea
           font-family inherit
@@ -131,3 +144,15 @@
         margin 7px 3px 0 0
         width 28px
         height 28px
+
+
+
+@keyframes fromLeft
+  from 
+    transform translateY(-15rem) rotate(15deg)
+    opacity 0 
+
+@keyframes fromRight
+  from
+    transform translateY(-15rem) rotate(-15deg)
+    opacity 0 

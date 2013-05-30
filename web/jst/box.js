@@ -1,8 +1,5 @@
 var box = {
 
-  clear: '<div class="bc clear"></div>',
-
-
   i: function() {
 
     _.n('loading boxes..');
@@ -18,8 +15,11 @@ var box = {
 
 
   handlers: function() {
+   
+    var controls = '.boxes .box .label .controls ';
 
-    $('.boxes .box .label .controls .destroy').unbind('click', box.destroy).click(box.destroy);
+    $(controls+'.destroy').unbind('click', box.destroy).click(box.destroy);
+    $(controls+'.maximize, ' + controls+'.restore').unbind('click', box.maximize).click(box.maximize);
 
   },
 
@@ -29,6 +29,22 @@ var box = {
     t.addClass('closing');
     setTimeout(function() { t.remove(); }, 200);
 
+  },
+
+  maximize: function() {
+
+    var t = $(this).closest('.box');
+
+    if (t.hasClass('maximize')) {
+      t.find('.maximize').show();
+      t.find('.restore').hide();
+      t.removeClass('maximize');
+      return true;
+    }
+
+    t.find('.maximize').hide();
+    t.find('.restore').show();
+    t.addClass('maximize');
   },
 
   spawn: function(id) {
@@ -45,9 +61,7 @@ var box = {
     $.get('/box/content/' + id, function(response) {
 
       if (response.success) {
-        var reg = new RegExp(box.clear,'g');
-        var html = $('.boxes').html().replace(reg, '');
-        $('.boxes').html(html + response.html + box.clear);
+        $('.boxes').append(response.html);
         box.scroll();
         _.n();
         box.handlers();

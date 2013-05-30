@@ -7,7 +7,7 @@ var contacts = {
   list: {},
 
   handlers: function() {
-    $('.contacts .contact').dblclick(contacts.select);
+    $('.contacts .contact').click(contacts.select);
     $('.contacts .search .close').click(contacts.search.close);
     $('.contacts .search input').keyup(contacts.search.keyup);
     $('.header .profile .tools .re-import').click(contacts.import);

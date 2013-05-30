@@ -80,6 +80,26 @@ class google {
 
   }
 
+  public function tokenVerify($token) {
+
+    try {
+      $results = self::decode($token);
+    } catch(Exception $e) {
+      return false;
+      //return ['error' => $e->getMessage()];
+    }
+
+    if (isset($results)) {
+      if (!isset($results['aud']) || $results['aud'] != self::$client_id) {
+        return false;
+        //return ['error' => 'invalid client'];
+      }
+
+      return $results;
+    }
+
+  }
+
   public function refresh($refresh_token) {
 
     $params = [
