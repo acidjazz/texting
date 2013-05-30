@@ -7,7 +7,7 @@ class android_ctl {
   public function __construct() {
 
     define('KDEBUG_JSON', true);
-    header('Content-type: application/json');
+ //   header('Content-type: application/json');
 
      if ($results = $this->tokenVerify()) {
        $this->user = user::i(user::findOne(array('id' =>  $results['id'])));
@@ -51,10 +51,46 @@ class android_ctl {
 
   }
 
-  private function _test($args) {
+  private function _messageImport($args) {
 
-    hpr('successfully called test()');
-    hpr($args);
+    /*
+    echo json_encode([['copy' => 'bob'],['copy' => 'suzy']]);
+    return true;
+    */
+
+    if (!isset($_REQUEST['messages'])) {
+      echo json_encode(['error' => 'no messages specified']);
+      return false;
+    }
+
+    $messages = json_decode($_REQUEST['messages'], true);
+
+    if ($messages == null || $messages == false || count($messages) < 1) {
+      echo json_encode(['error' => 'no messages specified']);
+      return false;
+    }
+
+    // wipe all existing messages .. for now
+    message::col()->remove(['user_id' => $this->user->id]);
+
+    foreach ($messages as $message) {
+
+      $mObj = new message();
+      $mObj->user_id = $this->user->id;
+
+      foreach ($message as $k=>$v) {
+        $mObj->$k = $v;
+      }
+
+      $mObj->save();
+    }
+
+    echo json_encode(
+      ['success' => true, 
+      'status' => 'imported '.count($messages).' messages']
+    );
+
+    return true;
 
   }
 
