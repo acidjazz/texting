@@ -15,8 +15,10 @@
   width 200px
   transition width 0.2s
   position relative
+  color dark3
+  background-color dark4
   &.loading
-    background-color white3
+    background-color dark1
   .body
     position relative
     height 500px
@@ -30,20 +32,22 @@
         opacity 0
 
   .search
-    background-color white1
     transition all 0.2s
     font-size 1.2em
-    padding 2px 5px
+    padding 5px
     overflow hidden
-    box-shadow inset 0px 0px 3px 0px rgba(0, 0, 0, 0.8)
+    background-color dark1
+    height 25px
     .icon
       float left
     input
       display block
       outline none
       float left
-      width 135px
+      width 110px
       border none
+      color dark3
+      margin 1px 0 0 0
       background-color inherit
       font-family inherit
       font-size inherit
@@ -54,14 +58,14 @@
     &.on
       height 30px
       opacity 1
-    .close
+    .close, .minimize
       float right
       margin 4px 0 0 0
       cursor pointer
-      color white1
+      color dark1
       transition color 0.2s
-      &.on
-        color black1
+      &.on, &.minimize
+        color dark3
         transition color 0.2s
 
 /*
@@ -74,15 +78,15 @@
   cursor ew-resize
   position relative
   float right
-  width 5px
-  height 500px
+  width 3px
+  height 535px
   background-color white3
   border-left 2px solid white4
   border-right 2px solid white4
   .handle
     position absolute
     top 50%
-    width 5px
+    width 3px
     height 20px
     padding 10px 0
     margin-top -20px
@@ -100,7 +104,7 @@
   position absolute
   top 0px
   left 0px
-  width 7px
+  width 5px
   height 100%
 
 .ghost:hover 
@@ -112,9 +116,11 @@
 .contact
   transition all 0.2s
   cursor pointer
-  border-bottom 1px solid white4
   padding 2px
   font-size 1.2em
+  height 44px
+  overflow hidden
+  border-bottom 1px solid rgba(dark3, 0.5)
   .name
     text-align left
     white-space nowrap
@@ -122,28 +128,30 @@
     overflow hidden
     transition opacity 0.2s
     transition-delay 0.2s
-    color black1
+    color dark3
     line-height 40px
     padding 0 0 0 5px
     opacity 1
     span
-      background-color orange1
+      color white1
+      background-color orange2
   .picture
     float right
-    border 2px solid blue1
+    border 2px solid dark3
     transition margin 0.2s 
     width size = 40px
     height size
+    overflow hidden
     img
       width size
     border-radius 50%
     overflow hidden
     div
       font-size 2em
-      color blue1
+      color dark3
       margin 0 0 0 -3px
   &:hover
-    background-color blue1
+    background-color blue5
   &:hover .name, &:hover .icon-user
     color white1
   &:hover .picture

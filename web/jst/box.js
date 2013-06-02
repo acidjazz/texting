@@ -1,5 +1,7 @@
 var box = {
 
+  loading: false,
+
   i: function() {
 
     _.n('loading boxes..');
@@ -26,7 +28,7 @@ var box = {
   destroy: function() {
 
     var t = $(this).closest('.box');
-    t.addClass('closing');
+    t.addClass('closing' + (Math.floor(Math.random() * 2) + 1));
     setTimeout(function() { t.remove(); }, 200);
 
   },
@@ -50,8 +52,16 @@ var box = {
   spawn: function(id) {
 
     var cbox = $('#box_' + id);
+
+    if (id == box.loading) {
+      return false;
+    }
+
+    box.loading = id;
+
     if (cbox.length > 0) {
       cbox.addClass('glow');
+      cbox.find('input').focus();
       setTimeout(function() { cbox.removeClass('glow'); }, 2000);
       return true;
     }
@@ -59,6 +69,8 @@ var box = {
     _.n('loading..');
 
     $.get('/box/content/' + id, function(response) {
+
+      box.loading = false;
 
       if (response.success) {
         $('.boxes').append(response.html);

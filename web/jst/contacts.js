@@ -55,6 +55,7 @@ var contacts = {
 
       $('.contacts .search input').val('');
       contacts.search.reset();
+      $(this).removeClass('on');
 
     }
 

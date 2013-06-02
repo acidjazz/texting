@@ -10,7 +10,8 @@ var resizer = {
     $('.resizer').mousedown(resizer.down);
     $(document).mouseup(resizer.up);
     $(document).mousemove(resizer.move);
-    $('.resizer').dblclick(resizer.dbl);
+    $('.resizer').click(resizer.dbl);
+    $('.contacts .minimize').click(resizer.dbl);
 
     resizer.el= $($('.resizer').data('for'));
 
@@ -19,6 +20,7 @@ var resizer = {
   down: function(event) {
     
     resizer.mdown = true;
+    $('.body').addClass('noselect');
     resizer.origin = event.clientX;
 
   },
@@ -31,6 +33,7 @@ var resizer = {
       $('.boxes').css({'margin-left': (size+10) + 'px'});
     }
     resizer.mdown = false;
+    $('.body').removeClass('noselect');
     $('.ghost').css({'left': '0px'});
     resizer.mdrag = false;
 
@@ -48,13 +51,15 @@ var resizer = {
 
   dbl: function() {
 
-    if (resizer.el.width() == '9') {
+    if (resizer.el.width() == '7') {
+      $('.contacts .body, .contacts .search').show();
       resizer.el.css('width', '200px');
       $('.boxes').css({'margin-left': '200px'});
       resizer.el.addClass('scrollable');
     } else {
-      resizer.el.css('width', '9px');
-      $('.boxes').css({'margin-left': '9px'});
+      $('.contacts .body, .contacts .search').hide();
+      resizer.el.css('width', '7px');
+      $('.boxes').css({'margin-left': '7px'});
       resizer.el.removeClass('scrollable');
       contacts.search.close();
     }

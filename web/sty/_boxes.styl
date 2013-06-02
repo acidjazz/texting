@@ -34,10 +34,14 @@
     &.glow
       box-shadow 0 0 5px 1px rgba(orange2, 1)
       transition box-shadow 0.2s
-    &.closing
+    &.closing1, &.closing2
       opacity 0
-      transform translateX(-30rem) 
       transition all 0.2s
+    &.closing1
+      transform translateX(-30rem) rotate(15deg)
+    &.closing2
+      transform translateX(-30rem) rotate(-15deg)
+
     .label
       background-color blue1
       font-size 1.2em
@@ -122,20 +126,23 @@
     .bottom
       background-color white1
       .input
-        textarea
+        input
           font-family inherit
           font-size inherit
           resize none
           width 200px
-          height 2em
-          padding 10px 0 0 5px
-          border none
+          padding 5px 0 5px 5px
+          margin 5px 0 5px 5px
+          border 1px solid white1
           outline none
           color black1
           &::-webkit-input-placeholder
             color black2
           &::-moz-placeholder
             color black2
+          &:focus
+            box-shadow 0 0 1px 0px rgba(orange2, 1)
+            transition box-shadow 0.2s
       .enter
         float right
         cursor pointer

@@ -1,16 +1,17 @@
 
 .contacts.loading
-  .search
-    .icon
-      span.icon-search
-    span.icon-cancel.close
-    input(placeholder='Search..',val='')
   .resizer(data-for='.contacts')
     .ghost
     .handle
       .dot  &middot
       .dot  &middot
       .dot  &middot
+  .search
+    .icon
+      span.icon-search
+    span.icon-left-circled.minimize
+    span.icon-cancel.close
+    input(placeholder='Search..',val='')
   .body.loading
     include _loader
     .clear
