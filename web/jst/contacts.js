@@ -21,6 +21,8 @@ var contacts = {
       var val = $(this).val();
       var reg = new RegExp(val, 'ig');
 
+      var matches = 0;
+
       contacts.search.reset();
 
       if (val == '') {
@@ -37,8 +39,16 @@ var contacts = {
           $(obj).hide();
         } else {
           ndiv.html(ndiv.html().replace(reg, '<span>' + val + '</span>'));
+          matches++;
         }
       });
+
+      if (matches == 0) {
+        $('.contacts .body .none').show();
+        $('.contacts .body .none').unbind('hover').hover(contacts.showimport, contacts.hideimport);
+      } else {
+        $('.contacts .body .none').hide();
+      }
 
     },
 
@@ -60,6 +70,9 @@ var contacts = {
     }
 
   },
+
+  showimport: function() { $('.header .profile').addClass('showimport'); },
+  hideimport: function() { $('.header .profile').removeClass('showimport'); },
 
   import: function() {
 

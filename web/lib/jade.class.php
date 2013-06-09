@@ -4,7 +4,7 @@ class jade {
 
   public static $templatedir = 'tpl/';
 
-  public static function c($template, $array=array(), $return=false) {
+  public static function c($template, $array=array(), $return=false, $options='-P') {
 
     $path = G_PATH.self::$templatedir;
 
@@ -27,7 +27,7 @@ class jade {
     fwrite($handle, json_encode($array));
     fclose($handle);
 
-    $cmd = "jade -p ".$path.$template." -P --obj '$file' < ".$path.$template;
+    $cmd = "jade -p ".$path.$template." $options --obj '$file' < ".$path.$template;
 
     $test = exec($cmd, $results, $code);
     $output = join("\r\n", $results);

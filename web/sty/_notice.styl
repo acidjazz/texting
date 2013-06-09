@@ -4,17 +4,17 @@
   position fixed
   width w = 400px
   margin-left -(w / 2)px
-  background-color white3
+  background-color white1
   overflow hidden
   left 50%
-  transition all 0.15s
-  box-shadow 0 0 0 5px 2px rgba(0, 0, 0, 0.5)
+  transition all 0.2s ease 0.2s
+  transform-origin 100% 0 0
+  box-shadow 0 0 1px 0px rgba(0, 0, 0, 0.5)
   .copy
     color black1
-    font-size 1em
-    height h = 3em
-    text-align center;
-    line-height h
+    font-size 2em
+    text-align center
+    padding 12px 0
 
   .lineloader
     display block
@@ -30,7 +30,7 @@
       height 2px
 
 .notice.off
-  top -50px
+  top 0px
   transform rotateX(-90deg)
 
 .notice.on

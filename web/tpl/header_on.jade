@@ -1,10 +1,13 @@
 .profile
   .tools
-    .hbutton(title='re-import your contacts')
+    .hbutton.reimport(title='re-import your contacts')
       a(href='#'): span.icon-arrows-cw.re-import
-    .hbutton(title='log out')
+    .hbutton.logout(title='log out')
       a(href='/auth/logout'): span.icon-off
   .left.loading
     .name #{user.name}
     .picture
       img(src=user.picture)
+.device
+  .none: a(target='_new',href='https://play.google.com/store/apps/') no device
+  .mobile.icon-mobile

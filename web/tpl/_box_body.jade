@@ -1,5 +1,4 @@
 .wrapper
-
   each message, index in messages
     .message(class=message.which)
       if message.picture
@@ -8,4 +7,4 @@
       else
         .picture.icon-user
       .copy #{message.copy}
-      .date 2 hours ago
+      .date: abbr.timestamp(data-stamp=message.date) loading

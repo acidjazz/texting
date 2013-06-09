@@ -174,6 +174,47 @@ class api_ctl {
 
   }
 
+  private function _send() {
+
+    if (!isset($_REQUEST['copy']) || empty($_REQUEST['copy'])) {
+      echo json_encode(['error' => true, 'status' => 'invalid copy']);
+      return false;
+    }
+
+    if (!isset($_REQUEST['phone']) || empty($_REQUEST['phone'])) {
+      echo json_encode(['error' => true, 'status' => 'invalid phone']);
+      return false;
+    }
+
+    if (isset($_REQUEST['id']) && !empty($_REQUEST['id']) && kcol::validId($_REQUEST['id'])) {
+
+      $contact = new contact(new MongoId($_REQUEST['id']));
+      if (!$contact->exists() || $contact->_user_id != $this->user->_id) {
+        echo json_encode(['error' => true, 'status' => 'invalid contact id']);
+        return false;
+      }
+
+    }
+
+    $message = new message();
+    $message->_user_id = $this->user->_id;
+    $message->phone = $_REQUEST['phone'];
+
+    if (isset($contact)) {
+      $message->_contact_id = $contact->_id;
+    }
+
+    $message->date = time();
+    $message->copy = $_REQUEST['copy'];
+    $message->status = 'pending';
+    $message->save();
+
+    echo json_encode(['success' => true, 'date' => $message->date]);
+    sleep(rand(1,2));
+    return true;
+
+  }
+
   private function _messageHistory($id) {
 
     $contact = new contact($id);
@@ -188,10 +229,12 @@ class api_ctl {
     $msgs = [];
     for ($m = rand(0,20); $m != 0; $m--) {
 
-      $msgs[$m]['which'] = (rand(0,1) ? 'from' : 'to');
+      $msgs[$m]['date'] = time()-rand(10000,1000000);
+
+      $msgs[$m]['which'] = (rand(0,1) ? 'from fromLeft' : 'to fromRight');
 
       if (rand(0,1)) {
-        $msgs[$m]['which'] = 'from';
+        $msgs[$m]['which'] = 'from fromLeft';
 
         if ($contact->picture != null) {
           $msgs[$m]['picture'] = '/img/pictures/'.$contact->picture->{'$id'}.'-40-40.jpeg';
@@ -203,20 +246,20 @@ class api_ctl {
           $msgs[$m]['picture'] = $this->user->picture;
         }
 
-        $msgs[$m]['which'] = 'to';
+        $msgs[$m]['which'] = 'to fromRight';
 
       }
 
-      $sentence = [];
+      $words = [];
 
       for ($s = rand(1, 30); $s != 0; $s--) {
         $word = '';
         for ($w = rand(2,10); $w != 0; $w--) {
           $word .= chr(rand(97, 122));
         }
-        $sentence[] = $word;
+        $words[] = $word;
       }
-      $msgs[$m]['copy'] = implode(' ', $sentence);
+      $msgs[$m]['copy'] = implode(' ', $words);
 
     }
 

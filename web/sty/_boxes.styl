@@ -12,6 +12,7 @@
 
   overflow auto
   margin 0 0 0 200px
+  border-top 2px solid blue4
   padding 2px 2px 0 2px
   position relative
   &.loading
@@ -71,11 +72,12 @@
       overflow hidden
       overflow-y auto
       height 300px
+      width 250px
       position relative
       .none
         text-align center
         font-size 0.8em
-        color white4
+        color black2
         font-style italic
         padding 5px
       &.loading
@@ -83,7 +85,6 @@
       .wrapper
         display table-cell
         vertical-align bottom
-        width inherit
         height inherit
       .message
         margin 0 0 1px 0
@@ -99,30 +100,38 @@
             width s
             height s
         &.from
-
-          animation fromLeft .5s 0s ease both
-          transform-origin bottom left
-
           text-align right
           .picture
             float right
             margin 0 0 0 5px
           .copy, .date
             margin 0 40px 0 0
+          .date abbr[title]
+            border-bottom-width 0
         &.to
-
-          animation fromRight .5s 0s ease both
-          transform-origin bottom right
-
           text-align left
           .picture
             float left
             margin 0 5px 0 0
           .copy, .date
             margin 0 0 0 40px
+        &.fromLeft
+          animation fromLeft .5s 0s ease both
+          transform-origin bottom left
+        &.fromRight
+          animation fromRight .5s 0s ease both
+          transform-origin bottom right
+        &.fromBottomLeft
+          animation fromBottomLeft .5s 0s ease both
+          transform-origin top right
+        &.fromBottomRight
+          animation fromBottomRight .5s 0s ease both
+          transform-origin top left
         .date
           color black2
           font-size 0.8em
+        .date abbr[title]
+          border-bottom-width 0
     .bottom
       background-color white1
       .input
@@ -136,6 +145,8 @@
           border 1px solid white1
           outline none
           color black1
+          &:disabled
+            background-color inherit
           &::-webkit-input-placeholder
             color black2
           &::-moz-placeholder
@@ -162,4 +173,14 @@
 @keyframes fromRight
   from
     transform translateY(-15rem) rotate(-15deg)
+    opacity 0 
+
+@keyframes fromBottomLeft
+  from
+    transform translateX(-20rem)
+    opacity 0 
+
+@keyframes fromBottomRight
+  from
+    transform translateX(20rem)
     opacity 0 

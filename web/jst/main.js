@@ -2,6 +2,7 @@
 var _ = {
 
   loop: false,
+  focused: true,
 
   i: function() {
 
@@ -27,11 +28,13 @@ var _ = {
 
   size: function() {
 
+    var gap = 35;
+
     // resize our body
-    var height = $(window).height() - ($('.header').outerHeight() + 35); 
+    var height = $(window).height() - ($('.header').outerHeight() + gap) - 2; 
     $('.contacts .body, .contacts .resizer').css({height: height + 'px'});
-    $('.contacts .resizer, .boxes').css({height: (height+35) + 'px'});
-    $('.boxes').css({height: (height+32) + 'px'});
+    $('.contacts .resizer, .boxes').css({height: (height+gap) + 'px'});
+    $('.boxes').css({height: (height+gap-3) + 'px'});
 
   },
 

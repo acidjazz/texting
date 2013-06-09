@@ -1,4 +1,4 @@
-.box(id='box_'+contact._id['$id'])
+.box(id='box_'+contact._id['$id'],data-id=contact._id['$id'],data-phone=contact.phones[0])
   .label
     .controls
       .bbutton.destroy(title='close')
@@ -14,5 +14,5 @@
     include _mloader
   .bottom
     .input
-      input(type='text',placeholder='Type message')
+      input(type='text',placeholder='Type message',disabled)
       .button.enter 

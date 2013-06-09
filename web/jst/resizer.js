@@ -30,7 +30,7 @@ var resizer = {
     if (resizer.mdown && resizer.mdrag) {
       var size = resizer.el.width() + event.clientX-resizer.origin
       resizer.el.css({'width': size + 'px'});
-      $('.boxes').css({'margin-left': (size+10) + 'px'});
+      $('.boxes').css({'margin-left': (size) + 'px'});
     }
     resizer.mdown = false;
     $('.body').removeClass('noselect');

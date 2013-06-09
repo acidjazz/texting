@@ -1,0 +1,27 @@
+.tloader
+  width 20px
+  height 5px
+  position absolute
+  bottom 5px
+  left 50px
+  .dot
+    width 3px
+    height 3px
+    background black2
+    position absolute
+    border-radius 50%
+    animation tdot 0.5s alternate infinite
+  .two
+    animation-delay 200ms
+    left 5px
+  .three
+    animation-delay 450ms
+    left 10px
+    
+
+@keyframes tdot
+  0%
+    transform translateY(0rem)
+  100%
+    transform translateY(-5px)
+    

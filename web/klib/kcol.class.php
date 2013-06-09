@@ -29,6 +29,15 @@ class kcol {
 
   }
 
+  public static function validId($id) {
+
+    if (preg_match('/^[0-9a-z]{24}$/', $id)) {
+      return true;
+    }
+
+    return false;
+  }
+
   public static function i($data) {
     $class = get_called_class();
     $that = new $class;
