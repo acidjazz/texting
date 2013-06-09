@@ -227,10 +227,8 @@
 }
 .tloader {
   width: 20px;
-  height: 5px;
-  position: absolute;
-  bottom: 5px;
-  left: 50px;
+  height: 1em;
+  position: relative;
 }
 .tloader .dot {
   width: 3px;
@@ -271,11 +269,11 @@
   }
 
   100% {
-    -webkit-transform: translateY(-5px);
-    -moz-transform: translateY(-5px);
-    -o-transform: translateY(-5px);
-    -ms-transform: translateY(-5px);
-    transform: translateY(-5px);
+    -webkit-transform: translateY(5px);
+    -moz-transform: translateY(5px);
+    -o-transform: translateY(5px);
+    -ms-transform: translateY(5px);
+    transform: translateY(5px);
   }
 }
 @-webkit-keyframes tdot {
@@ -288,11 +286,11 @@
   }
 
   100% {
-    -webkit-transform: translateY(-5px);
-    -moz-transform: translateY(-5px);
-    -o-transform: translateY(-5px);
-    -ms-transform: translateY(-5px);
-    transform: translateY(-5px);
+    -webkit-transform: translateY(5px);
+    -moz-transform: translateY(5px);
+    -o-transform: translateY(5px);
+    -ms-transform: translateY(5px);
+    transform: translateY(5px);
   }
 }
 @-o-keyframes tdot {
@@ -305,11 +303,11 @@
   }
 
   100% {
-    -webkit-transform: translateY(-5px);
-    -moz-transform: translateY(-5px);
-    -o-transform: translateY(-5px);
-    -ms-transform: translateY(-5px);
-    transform: translateY(-5px);
+    -webkit-transform: translateY(5px);
+    -moz-transform: translateY(5px);
+    -o-transform: translateY(5px);
+    -ms-transform: translateY(5px);
+    transform: translateY(5px);
   }
 }
 @-ms-keyframes tdot {
@@ -322,11 +320,11 @@
   }
 
   100% {
-    -webkit-transform: translateY(-5px);
-    -moz-transform: translateY(-5px);
-    -o-transform: translateY(-5px);
-    -ms-transform: translateY(-5px);
-    transform: translateY(-5px);
+    -webkit-transform: translateY(5px);
+    -moz-transform: translateY(5px);
+    -o-transform: translateY(5px);
+    -ms-transform: translateY(5px);
+    transform: translateY(5px);
   }
 }
 @keyframes tdot {
@@ -339,11 +337,11 @@
   }
 
   100% {
-    -webkit-transform: translateY(-5px);
-    -moz-transform: translateY(-5px);
-    -o-transform: translateY(-5px);
-    -ms-transform: translateY(-5px);
-    transform: translateY(-5px);
+    -webkit-transform: translateY(5px);
+    -moz-transform: translateY(5px);
+    -o-transform: translateY(5px);
+    -ms-transform: translateY(5px);
+    transform: translateY(5px);
   }
 }
 .smodal {
@@ -1578,7 +1576,6 @@ border-radius: 4px; }
   overflow: hidden;
   overflow-y: auto;
   height: 300px;
-  width: 250px;
   position: relative;
 }
 .boxes > .box .body .none {
@@ -1591,13 +1588,8 @@ border-radius: 4px; }
 .boxes > .box .body.loading {
   background-color: #ececec;
 }
-.boxes > .box .body .wrapper {
-  display: table-cell;
-  vertical-align: bottom;
-  height: inherit;
-}
 .boxes > .box .body .message {
-  margin: 0 0 1px 0;
+  margin: 1px 0 0 0;
   padding: 2px;
   background-color: #fff;
   min-height: 40px;
@@ -1612,6 +1604,13 @@ border-radius: 4px; }
   width: 40px;
   height: 40px;
 }
+.boxes > .box .body .message .date {
+  white-space: nowrap;
+  padding: 5px 0 0 0;
+}
+.boxes > .box .body .message .date abbr[title] {
+  border-bottom-width: 0;
+}
 .boxes > .box .body .message.from {
   text-align: right;
 }
@@ -1622,9 +1621,6 @@ border-radius: 4px; }
 .boxes > .box .body .message.from .copy,
 .boxes > .box .body .message.from .date {
   margin: 0 40px 0 0;
-}
-.boxes > .box .body .message.from .date abbr[title] {
-  border-bottom-width: 0;
 }
 .boxes > .box .body .message.to {
   text-align: left;
@@ -1688,9 +1684,6 @@ border-radius: 4px; }
 .boxes > .box .body .message .date {
   color: #a0a0a0;
   font-size: 0.8em;
-}
-.boxes > .box .body .message .date abbr[title] {
-  border-bottom-width: 0;
 }
 .boxes > .box .bottom {
   background-color: #fff;

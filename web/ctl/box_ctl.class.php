@@ -53,5 +53,29 @@ class box_ctl {
 
   }
 
+  private function _save() {
+
+    if (isset($_REQUEST['boxes']) && is_array($_REQUEST['boxes'])) {
+
+      $ids = [];
+      foreach ($_REQUEST['boxes'] as $box_id) {
+
+        if (!kcol::validId($box_id)) {
+          echo json_encode(['error' => true, 'status' => 'invalid id']);
+          return false;
+        }
+        $ids[] = $box_id;
+
+      }
+
+      $this->user->boxes = $ids;
+      $this->user->save();
+      echo json_encode(['success' => true, 'status' => 'save successful']);
+      return true;
+
+    }
+
+
+  }
 
 }

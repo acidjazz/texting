@@ -72,7 +72,6 @@
       overflow hidden
       overflow-y auto
       height 300px
-      width 250px
       position relative
       .none
         text-align center
@@ -82,12 +81,8 @@
         padding 5px
       &.loading
           background-color white3
-      .wrapper
-        display table-cell
-        vertical-align bottom
-        height inherit
       .message
-        margin 0 0 1px 0
+        margin 1px 0 0 0
         padding 2px
         background-color white1
         min-height 40px
@@ -99,6 +94,11 @@
           img
             width s
             height s
+        .date
+          white-space nowrap
+          padding 5px 0 0 0
+          abbr[title]
+            border-bottom-width 0
         &.from
           text-align right
           .picture
@@ -106,8 +106,6 @@
             margin 0 0 0 5px
           .copy, .date
             margin 0 40px 0 0
-          .date abbr[title]
-            border-bottom-width 0
         &.to
           text-align left
           .picture
@@ -130,8 +128,6 @@
         .date
           color black2
           font-size 0.8em
-        .date abbr[title]
-          border-bottom-width 0
     .bottom
       background-color white1
       .input
@@ -162,8 +158,6 @@
         margin 7px 3px 0 0
         width 28px
         height 28px
-
-
 
 @keyframes fromLeft
   from 

@@ -8,6 +8,13 @@ var _ = {
 
     console.log('_ initiation');
 
+    setTimeout(function() { $('.profile .left').removeClass('loading'); }, 1000);
+
+    // resizer our contact list to fit the screen
+    _.size();
+
+    $(window).resize(_.size);
+
     // initiate contact import if we haven't yet
     if (user.loggedin && !user.contacts_import) {
       contacts.import();
@@ -15,14 +22,10 @@ var _ = {
 
     if (user.loggedin && user.contacts_import) {
       contacts.load();
+      user.i();
     }
 
-    setTimeout(function() { $('.profile .left').removeClass('loading'); }, 1000);
 
-    // resizer our contact list to fit the screen
-    _.size();
-
-    $(window).resize(_.size);
    
   },
 

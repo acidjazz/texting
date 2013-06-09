@@ -7,13 +7,6 @@ var box = {
 
   i: function() {
 
-    _.n('loading boxes..');
-
-    setTimeout(function() {
-      $('.boxes').removeClass('loading').html('');
-      _.n();
-    }, 1000);
-
     box.handlers();
 
   },
@@ -86,6 +79,7 @@ var box = {
           '<abbr class="timestamp" data-stamp="'+results.date+'">loading</abbr');
         console.log(date_div.find('.timestamp').length);
         time.i(current.find('.timestamp'));
+        box.scroll(current);
       }
     });
 

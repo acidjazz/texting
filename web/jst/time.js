@@ -55,12 +55,13 @@ var time = {
   diff: function(stamp) {
 
     var diff = Math.floor(new Date().getTime()/1000-stamp);
-    var days = Math.floor(diff/60/60/24);
+    var months = Math.floor(diff/60/60/24/30);
+    var days = Math.floor(diff/60/60/24 - (months*30));
     var hours = Math.floor(diff/60/60);
     var minutes = Math.floor(diff/60);
     var seconds = Math.floor(diff - (minutes*60));
 
-    var values =  {seconds: seconds, minutes: minutes, hours: hours, days: days};
+    var values =  {seconds: seconds, minutes: minutes, hours: hours, days: days, months: months};
     
     return values;
 
@@ -115,7 +116,7 @@ var time = {
 
     if (diff.hours > 0) {
       if (diff.hours < 2) {
-        copy += diff.hours + ' hour';
+        copy += ' ' + diff.hours + ' hour';
       } else {
         copy = diff.hours + ' hour';
       }
@@ -123,6 +124,7 @@ var time = {
         copy += 's'; 
       }
     }
+
     if (diff.days > 0) {
       copy = diff.days + ' day';
       if (diff.days > 1) {
@@ -130,7 +132,24 @@ var time = {
       }
     }
 
+    if (diff.months > 0) {
+      if (diff.months < 4) {
+        copy += ' ' + diff.months + ' month';
+      } else {
+        copy = diff.months + ' month';
+      }
+      if (diff.months > 1) {
+        copy += 's'; 
+      }
+    }
+
+
+
     copy += ' ago';
+
+    if (copy == ' ago') {
+      return 'now';
+    }
 
     return copy;
 

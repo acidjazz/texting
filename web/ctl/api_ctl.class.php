@@ -202,15 +202,17 @@ class api_ctl {
 
     if (isset($contact)) {
       $message->_contact_id = $contact->_id;
+      $message->contact_name = $contact->name;
     }
 
     $message->date = time();
     $message->copy = $_REQUEST['copy'];
     $message->status = 'pending';
+    $message->which = 'to';
     $message->save();
 
     echo json_encode(['success' => true, 'date' => $message->date]);
-    sleep(rand(1,2));
+    //sleep(rand(1,2));
     return true;
 
   }
@@ -224,9 +226,43 @@ class api_ctl {
       return false;
     }
 
-    sleep(rand(1,2));
+    //sleep(rand(1,2));
 
     $msgs = [];
+    foreach (message::find(['_contact_id' => $contact->_id]) as $message) {
+      $msg = message::i($message);
+      if ($msg->which == 'to') {
+        $msg->whichClass = 'to fromRight';
+        $msg->picture = $this->user->picture;
+      } else {
+        $msg->whichClass = 'from fromLeft';
+        $msg->picture = '/img/pictures/'.$contact->picture->{'$id'}.'-40-40.jpeg';
+      }
+      $msgs[] = $msg->data();
+    }
+
+    //$msgs = $this->randomMessages($contact);
+
+    if (count($msgs) < 1) {
+      $html = jade::c('_box_body_none', [], true);
+    } else {
+      $html = jade::c('_box_body', [
+        'messages' => $msgs, 
+        'user' => $this->user->data(),
+        'contact' => $contact->data(),
+        ], true);
+    }
+
+    echo json_encode(['success' => true, 'html' => $html]);
+
+    return true;
+
+  }
+
+  private function randomMessages($contact) {
+
+    $msgs = [];
+
     for ($m = rand(0,20); $m != 0; $m--) {
 
       $msgs[$m]['date'] = time()-rand(10000,1000000);
@@ -263,16 +299,7 @@ class api_ctl {
 
     }
 
-
-    if (count($msgs) < 1) {
-      $html = jade::c('_box_body_none', [], true);
-    } else {
-      $html = jade::c('_box_body', ['messages' => $msgs], true);
-    }
-
-    echo json_encode(['success' => true, 'html' => $html]);
-
-    return true;
+    return $msgs;
 
   }
 
