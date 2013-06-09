@@ -6,10 +6,9 @@ var _ = {
 
   i: function() {
 
-    console.log('_ initiation');
-
     setTimeout(function() { $('.profile .left').removeClass('loading'); }, 1000);
 
+    resizer.i()
     // resizer our contact list to fit the screen
     _.size();
 
@@ -24,8 +23,6 @@ var _ = {
       contacts.load();
       user.i();
     }
-
-
    
   },
 

@@ -3,17 +3,22 @@ var user = {
 
   loggedin: false,
   contacts_import: false,
-  boxes: false,
+  boxes: [],
+  contacts: 200,
 
   saveInterval: false,
 
   i: function() {
 
-    if (user.boxes.length > 0) {
-
+    if (user.boxes && user.boxes.length > 0) {
       user.boxes = user.boxes.split(',').sort();
       user.loadboxes();
+    } else  {
+      $('.boxes').removeClass('loading').html('');
+    }
 
+    if (user.contacts != 200) {
+      resizer.change(user.contacts);
     }
 
     user.handlers();
@@ -56,13 +61,17 @@ var user = {
 
     boxes.sort();
 
-    if (boxes.length == 0 || boxes.compare(user.boxes)) {
+    // only save if we have a change in windows, f contacts size
+    if (( boxes.length == 0 || boxes.equals(user.boxes) ) && resizer.width == user.contacts ) {
       return true;
     } 
 
     user.boxes = boxes;
+    user.contacts = resizer.width;
 
-    $.get('/box/save', {boxes: user.boxes}, function(response) {
+    _.n('saving state..');
+    $.get('/box/save', {boxes: user.boxes, contacts: resizer.width}, function(response) {
+      _.n();
 
     }, 'json');
 

@@ -1,5 +1,5 @@
 
-Array.prototype.compare = function (array) {
+Array.prototype.equals = function (array) {
     // if the other array is a falsy value, return
     if (!array)
         return false;
@@ -12,7 +12,7 @@ Array.prototype.compare = function (array) {
         // Check if we have nested arrays
         if (this[i] instanceof Array && array[i] instanceof Array) {
             // recurse into the nested arrays
-            if (!this[i].compare(array[i]))
+            if (!this[i].equals(array[i]))
                 return false;
         }
         else if (this[i] != array[i]) {

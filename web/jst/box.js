@@ -29,7 +29,6 @@ var box = {
   },
 
   activate: function() {
-    console.log('activating');
     $(this).find('input').focus();
   },
 
@@ -77,7 +76,6 @@ var box = {
         var date_div = $('#messageId_' + messageId + ' .date');
         date_div.html(
           '<abbr class="timestamp" data-stamp="'+results.date+'">loading</abbr');
-        console.log(date_div.find('.timestamp').length);
         time.i(current.find('.timestamp'));
         box.scroll(current);
       }

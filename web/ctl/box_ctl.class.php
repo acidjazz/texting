@@ -55,7 +55,8 @@ class box_ctl {
 
   private function _save() {
 
-    if (isset($_REQUEST['boxes']) && is_array($_REQUEST['boxes'])) {
+    if (isset($_REQUEST['contacts']) && is_numeric($_REQUEST['contacts']) 
+      && isset($_REQUEST['boxes']) && is_array($_REQUEST['boxes'])) {
 
       $ids = [];
       foreach ($_REQUEST['boxes'] as $box_id) {
@@ -68,13 +69,14 @@ class box_ctl {
 
       }
 
-      $this->user->boxes = $ids;
+      $this->user->state = ['contacts' => $_REQUEST['contacts'], 'boxes' => $ids];
       $this->user->save();
       echo json_encode(['success' => true, 'status' => 'save successful']);
       return true;
 
     }
 
+    echo json_encode(['error' => true, 'status' => 'no boxes specified']);
 
   }
 

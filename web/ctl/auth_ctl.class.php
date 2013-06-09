@@ -16,7 +16,6 @@ class auth_ctl {
 
     $goo = new google();
 
-
     if ($results = $goo->codeVerify($_REQUEST['code'])) {
 
       $user = user::i(user::findOne(array('id' => $results['jwt']['id'])));

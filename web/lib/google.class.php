@@ -95,6 +95,8 @@ class google {
         //return ['error' => 'invalid client'];
       }
 
+      self::$access_token = $token;
+
       return $results;
     }
 
