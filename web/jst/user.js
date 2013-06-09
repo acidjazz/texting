@@ -32,12 +32,18 @@ var user = {
 
     _.n('loading boxes..');
 
-    $('.boxes').removeClass('loading').html('');
-    for (var i = 0, len = user.boxes.length; i != len; i++) {
-      box.spawn(user.boxes[i]);
-    }
 
-    _.n();
+    setTimeout(function() {
+
+      $('.boxes').removeClass('loading').html('');
+
+      for (var i = 0, len = user.boxes.length; i != len; i++) {
+        box.spawn(user.boxes[i]);
+      }
+
+      _.n();
+
+    }, 500);
 
   },
 

@@ -226,7 +226,7 @@ class api_ctl {
       return false;
     }
 
-    //sleep(rand(1,2));
+    sleep(rand(1,2));
 
     $msgs = [];
     foreach (message::find(['_contact_id' => $contact->_id]) as $message) {
