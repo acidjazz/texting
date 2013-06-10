@@ -16,6 +16,7 @@ html
     script(type='text/javascript',src='/jst/time.js')
     script(type='text/javascript',src='/jst/message.js')
     script(type='text/javascript',src='/jst/box.js')
+    script(type='text/javascript',src='/jst/comet.js')
 
   body
     .body
@@ -37,7 +38,7 @@ html
       .lineloader
         span
 
-  if user != false
+  if user 
     script
       user.loggedin = true;
       user.contacts_import = #{user.contacts_import};
@@ -46,6 +47,10 @@ html
     script
       user.boxes = '#{user.state.boxes}';
       user.contacts = '#{user.state.contacts}';
+  if user.device
+    each val, key in user.device
+      script
+        user.device.#{key} = '#{val}';
   script
     _.i();
 

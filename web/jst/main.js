@@ -6,8 +6,6 @@ var _ = {
 
   i: function() {
 
-    setTimeout(function() { $('.profile .left').removeClass('loading'); }, 1000);
-
     resizer.i()
     // resizer our contact list to fit the screen
     _.size();
@@ -31,7 +29,7 @@ var _ = {
     var gap = 35;
 
     // resize our body
-    var height = $(window).height() - ($('.header').outerHeight() + gap) - 2; 
+    var height = $(window).height() - ($('.header').outerHeight() + gap) - 3; 
     $('.contacts .body, .contacts .resizer').css({height: height + 'px'});
     $('.contacts .resizer, .boxes').css({height: (height+gap) + 'px'});
     $('.boxes').css({height: (height+gap-3) + 'px'});

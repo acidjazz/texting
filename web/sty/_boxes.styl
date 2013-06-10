@@ -4,17 +4,18 @@
   ::-webkit-scrollbar
     width 5px
   ::-webkit-scrollbar-track
-    background-color blue1
+    background-color dark1
     box-shadow inset 1px 1px 5px rgba(0, 0, 0, 0.5)
   ::-webkit-scrollbar-thumb
     border-radius 2px
-    background linear-gradient(left, #fecf23, #fd9215)
+    background linear-gradient(left, orange1, orange2)
 
   overflow auto
   margin 0 0 0 200px
-  border-top 2px solid blue4
+  border-top 2px solid dark4
   padding 2px 2px 0 2px
   position relative
+  background-color white1
   &.loading
     background-color white3
 
@@ -22,18 +23,20 @@
     margin 5px
     width 250px
     float left
-    background-color white3
+    background-color white2
     overflow hidden
     transition all 1.8s
     border-radius 3px
     box-sizing border-box
-    border 1px solid black3
+    border 1px solid lightborder2
     border-bottom-width 2px
     border-top-width 0
     &.maximize
       width 99%
+      input
+        width 95% !important
     &.glow
-      box-shadow 0 0 5px 1px rgba(orange2, 1)
+      box-shadow 0 0 5px 1px rgba(black1, 1)
       transition box-shadow 0.2s
     &.closing1, &.closing2
       opacity 0
@@ -44,9 +47,10 @@
       transform translateX(-30rem) rotate(-15deg)
 
     .label
-      background-color blue1
+      background-color light2a
+      background linaer-gradient(top, light2a, light2b)
       font-size 1.2em
-      border-bottom 2px solid blue4
+      border-bottom 2px solid lightborder1
       .controls
         float right
         padding 5px 5px 5px 0
@@ -56,15 +60,15 @@
           float right
           cursor pointer
           padding 2px
-          color white1
+          color black1
           font-size 1em
           &:hover
             buttonhover()
       .name
-        color white1
+        color black1
         padding 5px 0 0 10px
       .phone
-        color white4
+        color rgba(black1, 0.7)
         font-size 0.7em
         padding 0 0 5px 10px
     .body
@@ -82,10 +86,11 @@
       &.loading
           background-color white3
       .message
-        margin 1px 0 0 0
         padding 2px
         background-color white1
         min-height 40px
+        border-top 1px solid white2
+        border-bottom 1px solid white3
         .picture
           background-color white3
           width s = 40px
@@ -97,6 +102,8 @@
         .date
           white-space nowrap
           padding 5px 0 0 0
+          color black4
+          font-size 0.8em
           abbr[title]
             border-bottom-width 0
         &.from
@@ -104,6 +111,14 @@
           .picture
             float right
             margin 0 0 0 5px
+          .triangle
+            position absolute
+            width 0px
+            height 0px
+            border-style solid
+            border-width 10px 0 0 10px
+            border-color transparent transparent transparent white1
+            top 32px
           .copy, .date
             margin 0 40px 0 0
         &.to
@@ -111,6 +126,16 @@
           .picture
             float left
             margin 0 5px 0 0
+          .triangle
+            position absolute
+            width 0px
+            height 0px
+            border-style solid
+            border-width 0 0 10px 10px
+            border-color transparent transparent white1 transparent
+            top 32px
+            left 32px
+
           .copy, .date
             margin 0 0 0 40px
         &.fromLeft
@@ -125,9 +150,6 @@
         &.fromBottomRight
           animation fromBottomRight .5s 0s ease both
           transform-origin top left
-        .date
-          color black2
-          font-size 0.8em
     .bottom
       background-color white1
       .input
@@ -144,9 +166,9 @@
           &:disabled
             background-color inherit
           &::-webkit-input-placeholder
-            color black2
+            color black4
           &::-moz-placeholder
-            color black2
+            color black4
           &:focus
             box-shadow 0 0 1px 0px rgba(orange2, 1)
             transition box-shadow 0.2s

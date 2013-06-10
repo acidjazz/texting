@@ -174,10 +174,20 @@ class api_ctl {
 
   }
 
+
+  public function test() {
+
+
+    hpr($this->user);
+
+
+
+  }
+
   private function _send() {
 
-    if (!isset($_REQUEST['copy']) || empty($_REQUEST['copy'])) {
-      echo json_encode(['error' => true, 'status' => 'invalid copy']);
+    if (!isset($_REQUEST['body']) || empty($_REQUEST['body'])) {
+      echo json_encode(['error' => true, 'status' => 'invalid body']);
       return false;
     }
 
@@ -205,13 +215,20 @@ class api_ctl {
       $message->contact_name = $contact->name;
     }
 
-    $message->date = time();
-    $message->copy = $_REQUEST['copy'];
+    $message->body = $_REQUEST['body'];
     $message->status = 'pending';
+    $message->date = time();
     $message->which = 'to';
     $message->save();
 
-    echo json_encode(['success' => true, 'date' => $message->date]);
+    if ($this->user->regid) {
+      $gcm = new gcm();
+      $results = $gcm->send($this->user->regid, $message->data());
+      $message->gcm_message_id = $results['results'][0]['message_id'];
+      $message->save();
+    }
+
+    echo json_encode(['success' => true, 'id' => $message->id(true)]);
     //sleep(rand(1,2));
     return true;
 
@@ -226,17 +243,17 @@ class api_ctl {
       return false;
     }
 
-    sleep(rand(1,2));
-
     $msgs = [];
-    foreach (message::find(['_contact_id' => $contact->_id]) as $message) {
+    foreach (message::find(['_contact_id' => $contact->_id])->sort(['date' => 1]) as $message) {
       $msg = message::i($message);
       if ($msg->which == 'to') {
         $msg->whichClass = 'to fromRight';
         $msg->picture = $this->user->picture;
       } else {
         $msg->whichClass = 'from fromLeft';
-        $msg->picture = '/img/pictures/'.$contact->picture->{'$id'}.'-40-40.jpeg';
+        if ($contact->picture) {
+          $msg->picture = '/img/pictures/'.$contact->picture->{'$id'}.'-40-40.jpeg';
+        }
       }
       $msgs[] = $msg->data();
     }
@@ -295,7 +312,7 @@ class api_ctl {
         }
         $words[] = $word;
       }
-      $msgs[$m]['copy'] = implode(' ', $words);
+      $msgs[$m]['body'] = implode(' ', $words);
 
     }
 

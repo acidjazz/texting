@@ -36,13 +36,13 @@ var box = {
 
     if (event.keyCode == 13) {
       var t = $(this);
-      var copy = t.val();
-      if (copy == '') {
+      var body = t.val();
+      if (body == '') {
         return true;
       }
 
       var current = t.closest('.box');
-      box.send(current, copy, current.data('phone'), current.data('id'));
+      box.send(current, body, current.data('phone'), current.data('id'));
       t.val('');
     }
 
@@ -63,21 +63,25 @@ var box = {
 
   },
 
-  send: function(current, copy, phone, id) {
+  send: function(current, body, phone, id) {
 
     var messageId = ++box.messageId;
 
-    var html = box.sendHTML.replace(/{{copy}}/, copy).replace(/{{id}}/, messageId);
+    var html = box.sendHTML.replace(/{{body}}/, body).replace(/{{id}}/, messageId);
     current.find('.body').append(html);
     box.scroll(current);
 
-    message.send(copy, phone, id, function(results) {
+    message.send(body, phone, id, function(results) {
       if (results.success) {
+        comet.pending.push(results.id);
+        console.log(results);
+        /* dont want to show a date anymore.. that comes from confirmations
         var date_div = $('#messageId_' + messageId + ' .date');
         date_div.html(
           '<abbr class="timestamp" data-stamp="'+results.date+'">loading</abbr');
         time.i(current.find('.timestamp'));
         box.scroll(current);
+        */
       }
     });
 

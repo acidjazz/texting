@@ -96,11 +96,11 @@ class contactsImport {
               $contact->groups = $groups;
               $contact->save();
             }
-            break;
+            continue;
           }
 
           if (!isset($entry['gd$phoneNumber'])) {
-            break;
+            continue;
           }
 
           if ($currentContacts%2) {

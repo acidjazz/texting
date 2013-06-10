@@ -7,15 +7,48 @@ class android_ctl {
   public function __construct() {
 
     define('KDEBUG_JSON', true);
- //   header('Content-type: application/json');
+    header('Content-type: application/json');
 
-     if ($results = $this->tokenVerify()) {
-       $this->user = user::i(user::findOne(array('id' =>  $results['id'])));
-     } else {
-       return false;
-     }
+    if  ($user = $this->gcmVerify()) {
+      $this->user = $user;
+    }
+
+    if ($this->user == false) {
+      return false;
+    }
+
+    // globally allow deivce info updating
+    if (isset($_REQUEST['device'])) {
+      $device = json_decode($_REQUEST['device']);
+      $this->user->device = json_decode($_REQUEST['device']);
+    }
+
   }
 
+  public function __call($method, $args) {
+
+
+    if (!$this->user && isset($_REQUEST['token']) && !$this->tokenVerify()) {
+      echo json_encode(['error' => 'invalid token']);
+      return false;
+    }
+
+    if (!$this->user) {
+      echo json_encode(['error' => 'invalid regid']);
+      return false;
+    }
+
+    if (!method_exists($this, '_'.$method)) {
+      echo json_encode(['error' => 'method restricted']);
+      return false;
+    }
+
+    call_user_func_array([$this, '_'.$method], $args);
+
+  }
+
+
+  // verify a passed regid
   private function gcmVerify() {
 
     // invalid regid
@@ -23,7 +56,7 @@ class android_ctl {
       return false;
     }
 
-    $user = user::i(user::findOne(array('regid' =>  $_REQUEST['regid'])));
+    $user = user::i(user::findOne(['regid' =>  $_REQUEST['regid']]));
     if (!$user->exists()) {
       return false;
     }
@@ -32,6 +65,7 @@ class android_ctl {
 
   }
 
+  // verify a passed token
   private function tokenVerify() {
 
     // invalid token
@@ -51,6 +85,7 @@ class android_ctl {
   }
 
 
+  // initialization.. store 
   public function init() {
 
     $goo = new google();
@@ -90,59 +125,113 @@ class android_ctl {
 
   }
 
-  public function __call($method, $args) {
 
-    if (!$this->user) {
-      echo json_encode(['error' => 'invalid token']);
+  private function _confirm() {
+
+    if (!isset($_REQUEST['messages'])) {
+      echo json_encode(['error' => true, 'status' => 'no messages specified']);
       return false;
     }
 
-    if (!method_exists($this, '_'.$method)) {
-      echo json_encode(['error' => 'method restricted']);
+    $msgs = json_decode($_REQUEST['messages'], true);
+
+    if ($msgs == null) {
+      echo json_encode(['error' => true, 'status' => 'invalid json format']);
       return false;
     }
 
-    call_user_func_array([$this, '_'.$method], $args);
+    foreach ($msgs as $msg) {
+
+      $message = new message(new MongoId($msg['$id']));
+
+      if (!$message->exists()) {
+        echo json_encode(['error' => true, 'status' => 'message not found: ' . $msg['$id']]);
+        return false;
+      }
+
+      if ($message->_user_id != $this->user->_id) {
+        echo json_encode(['error' => true, 'status' => 'message ownership error']);
+        return false;
+      }
+
+
+      $message->status = 'confirmed';
+      $message->date = $msg['date'];
+      $message->save();
+    }
+
+    echo json_encode(['success' => true, 'status' => 'messages confirmed']);
+    return false;
 
   }
 
-  private function _messageImport($args) {
+  public function test() {
 
-    /*
-    echo json_encode([['copy' => 'bob'],['copy' => 'suzy']]);
-    return true;
-    */
+  }
+
+  private function _import($args) {
+
 
     if (!isset($_REQUEST['messages'])) {
-      echo json_encode(['error' => 'no messages specified']);
+      echo json_encode(['error' => true, 'status' => 'no messages specified']);
       return false;
     }
 
-    $messages = json_decode($_REQUEST['messages'], true);
+    $msgs = json_decode($_REQUEST['messages'], true);
 
-    if ($messages == null || $messages == false || count($messages) < 1) {
-      echo json_encode(['error' => 'no messages specified']);
+    if ($msgs == null || $msgs == false || count($msgs) < 1) {
+      echo json_encode(['error' => true, 'status' => 'no messages specified']);
       return false;
     }
 
     // wipe all existing messages .. for now
-    message::col()->remove(['user_id' => $this->user->id]);
+    message::col()->remove(['_user_id' => $this->user->_id]);
 
-    foreach ($messages as $message) {
+    $binder = new contactBinder($this->user);
 
-      $mObj = new message();
-      $mObj->user_id = $this->user->id;
+    foreach ($msgs as $msg) {
 
-      foreach ($message as $k=>$v) {
-        $mObj->$k = $v;
+      $message = new message();
+      $message->_user_id = $this->user->_id;
+
+      if (isset($msg['address'])) {
+
+        if ($_contact_id = $binder->search($msg['address'])) {
+          $message->_contact_id = new MongoId($_contact_id);
+        }
+
       }
 
-      $mObj->save();
+      if (isset($msg['type']) && $msg['type'] == 2) {
+        $message->which = 'to';
+      }  else {
+        $message->which = 'from';
+      }
+
+      foreach ($msg as $k=>$v) {
+
+        switch ($k) {
+
+          case 'date' :
+          case 'date_sent' :
+            $message->$k = floatval($v);
+            break;
+          case 'body' :
+            $message->$k = utf8_encode($v);
+            break;
+          default :
+            $message->$k = $v;
+            break;
+        }
+
+      }
+
+      $message->save();
     }
 
     echo json_encode(
       ['success' => true, 
-      'status' => 'imported '.count($messages).' messages']
+      'status' => 'imported '.count($msgs).' messages']
     );
 
     return true;

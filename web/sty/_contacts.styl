@@ -5,7 +5,7 @@
     width 7px
     border-radius 5px
   ::-webkit-scrollbar-track
-    background-color dark2
+    background-color dark5
     box-shadow inset 1px 1px 5px rgba(0, 0, 0, 0.5)
   ::-webkit-scrollbar-thumb
     background linear-gradient(left, orange1, orange2)
@@ -16,7 +16,7 @@
   transition width 0.2s
   position relative
   color dark3
-  background-color dark4
+  background-color dark1
   &.loading
     background-color white3
   .body
@@ -38,7 +38,8 @@
       font-style italic
 
   .search
-    border-top 2px solid blue4
+    border-top 2px solid dark4
+    border-bottom 1px solid dark4
     transition all 0.2s
     font-size 1.2em
     padding 5px
@@ -53,15 +54,15 @@
       float left
       width 110px
       border none
-      color dark3
+      color white1
       margin 1px 0 0 0
       background-color inherit
       font-family inherit
       font-size inherit
       &::-webkit-input-placeholder
-        color black2
+        color dark5
       &::-moz-placeholder
-        color black2
+        color dark5
     &.on
       height 30px
       opacity 1
@@ -117,6 +118,7 @@
   left 0px
   width 5px
   height 100%
+  transition background-color 0.2s
 
 .ghost:hover 
   background-color rgba(green2, 1)
@@ -131,7 +133,8 @@
   font-size 1.2em
   height 44px
   overflow hidden
-  border-bottom 1px solid rgba(dark3, 0.5)
+  border-top 1px solid dark2
+  border-bottom 1px solid dark4
   .name
     text-align left
     white-space nowrap
@@ -146,6 +149,7 @@
     span
       color white1
       background-color orange2
+      border-radius 5px
   .picture
     float right
     border 2px solid dark3
@@ -162,7 +166,8 @@
       color dark3
       margin 0 0 0 -3px
   &:hover
-    background-color blue5
+    border-top 1px solid blue2
+    background-color blue1
   &:hover .name, &:hover .icon-user
     color white1
   &:hover .picture

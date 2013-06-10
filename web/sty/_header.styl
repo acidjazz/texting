@@ -1,13 +1,16 @@
 .header
   padding 0px 20px
-  background-color blue1
-  //border-bottom 2px solid blue4
-  color white1
+  background-color dark2
+  background linear-gradient(top, dark1, dark2)
+  color dark3
   > .title
     float left
     font-size 2.5em
     font-weight bold
     padding 5px 0
+    color white1
+    > span
+      color green1
   > .logo
     background url('/img/logo_40.png')
     width 40px
@@ -23,9 +26,9 @@
 
   .tools
     z-index 1
-    border 1px solid blue3
+    border 1px solid dark3
     border-radius 3px
-    background-color blue2
+    background-color dark5
     margin 5px 0 0 -10px
     padding 0 10px
     float right
@@ -46,13 +49,11 @@
     z-index 2
     float right
     transition all 0.5s
-    margin 0 -65px 0 0
     > .name
       float left
       margin 5px -5px 0 0
       font-size 1.3em
       padding 7px
-      background-color blue1
     > .picture
       float right
       width 40px
@@ -63,10 +64,6 @@
       img
         width inherit
         height inherit
-    &.loading
-      margin 0
-  .profile:hover .left, .showimport .left
-    margin 0
   .showimport .reimport a
     buttonhover()
 

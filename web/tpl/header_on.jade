@@ -8,6 +8,7 @@
     .name #{user.name}
     .picture
       img(src=user.picture)
-.device
-  .none: a(target='_new',href='https://play.google.com/store/apps/') no device
-  .mobile.icon-mobile
+if !user.device
+  include _device_none
+else
+  include _device

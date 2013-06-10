@@ -1,0 +1,7 @@
+.device.active
+  //.mobile.icon-mobile
+  .batterycontainer
+    .battery(style='width: ' + (user.device.batteryLevel*40/100) + 'px',title=user.device.batteryLevel + '%')
+  if user.device.batteryIsCharging == 1
+    .charging.icon-flash(title='Phone is charging')
+  .build #{user.device.buildModel}

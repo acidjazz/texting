@@ -4,6 +4,7 @@ var user = {
   loggedin: false,
   contacts_import: false,
   boxes: [],
+  device: {},
   contacts: 200,
 
   saveInterval: false,

@@ -1,12 +1,12 @@
 
 var message = {
 
-  send: function(copy, phone, id, callback) {
+  send: function(body, phone, id, callback) {
 
-    $.get('/api/send', {copy: copy, phone: phone, id: id}, function(response) {
+    $.get('/api/send', {body: body, phone: phone, id: id}, function(response) {
 
       if (response.success) {
-        callback({success: true, date: response.date});
+        callback({success: true, id: response.id});
       } else {
         callback({error: true, error: response.status});
       }

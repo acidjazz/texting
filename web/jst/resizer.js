@@ -5,6 +5,7 @@ var resizer = {
   mdrag: false,
   origin: false,
   width: 200,
+  max: 500,
   el: false,
 
   i: function() {
@@ -41,16 +42,34 @@ var resizer = {
   },
 
   change: function(size) {
+
+    if (size > resizer.max) {
+      return false;
+    }
+
     resizer.width = size;
     resizer.el.css({'width': size + 'px'});
     $('.boxes').css({'margin-left': (size) + 'px'});
+    if (size > 7) {
+      $('.contacts .body, .contacts .search').show();
+    }
+
   },
 
   move: function(event) {
 
     if (resizer.mdown) {
+
+      var size = resizer.el.width() + event.clientX-resizer.origin
+
+      if (size > resizer.max) {
+        return false;
+      }
+
       $('.ghost').css({'left': (event.clientX-resizer.el.width()) + 'px'});
       resizer.mdrag = true;
+
+
     }
 
   },

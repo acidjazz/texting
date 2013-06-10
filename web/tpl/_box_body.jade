@@ -1,9 +1,15 @@
 each message, index in messages
-  .message(class=message.whichClass)
+  .message(class=message.whichClass,data-status=message.status)
     if message.picture
       .picture
+        .triangle
         img(src=message.picture)
     else
       .picture.icon-user
-    .copy #{message.copy}
-    .date: abbr.timestamp(data-stamp=message.date) loading
+      .triangle
+    .copy #{message.body}
+    if message.status != "pending"
+      .date: abbr.timestamp(data-stamp=message.date) loading
+    else
+      .date
+        include _tloader
