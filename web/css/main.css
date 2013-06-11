@@ -1125,10 +1125,31 @@ border-radius: 4px; }
   -moz-box-shadow: 0px 0px 2px 0px #34313a;
   box-shadow: 0px 0px 2px 0px #34313a;
 }
-.header > .login {
+.header .login {
   float: right;
   color: #fff;
-  margin: 5px 0 0 0;
+  font-size: 1.2em;
+  border: 1px solid #9e98a9;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  margin: 10px 0 0 0;
+  background-color: #635f6c;
+}
+.header .login a {
+  display: block;
+  color: #fff;
+  padding: 5px;
+  text-decoration: none;
+}
+.header .login:hover,
+.header .login a:hover {
+  color: #7db647;
+  text-shadow: 0px 0px 5px #8aca4d;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
 }
 .header .tools {
   z-index: 1;
@@ -1153,9 +1174,8 @@ border-radius: 4px; }
 }
 .header .hbutton:hover,
 .header .hbutton a:hover {
-  color: #fecf23;
-  text-shadow: 0px 0px 5px rgba(253,146,21,0.5);
-  background-color: #9e98a9;
+  color: #7db647;
+  text-shadow: 0px 0px 5px #8aca4d;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
@@ -1194,9 +1214,8 @@ border-radius: 4px; }
   height: inherit;
 }
 .header .showimport .reimport a {
-  color: #fecf23;
-  text-shadow: 0px 0px 5px rgba(253,146,21,0.5);
-  background-color: #9e98a9;
+  color: #7db647;
+  text-shadow: 0px 0px 5px #8aca4d;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
@@ -1228,9 +1247,8 @@ border-radius: 4px; }
   text-decoration: none;
 }
 .header .device .build a:hover {
-  color: #fecf23;
-  text-shadow: 0px 0px 5px rgba(253,146,21,0.5);
-  background-color: #9e98a9;
+  color: #7db647;
+  text-shadow: 0px 0px 5px #8aca4d;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
@@ -1241,7 +1259,7 @@ border-radius: 4px; }
   float: right;
   width: 48px;
   height: 20px;
-  margin: 10px 0 0;
+  margin: 9px 0 0;
 }
 .header .device .charging,
 .header .device .charging:after {
@@ -1390,15 +1408,13 @@ border-radius: 4px; }
 .contacts .search .minimize.on:hover,
 .contacts .search .close.minimize:hover,
 .contacts .search .minimize.minimize:hover {
-  color: #fecf23;
-  text-shadow: 0px 0px 5px rgba(253,146,21,0.5);
-  background-color: #9e98a9;
+  color: #7db647;
+  text-shadow: 0px 0px 5px #8aca4d;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
   -ms-transition: all 0.2s;
   transition: all 0.2s;
-  background-color: #9e98a9;
 }
 .resizer {
   cursor: ew-resize;
@@ -1584,6 +1600,9 @@ border-radius: 4px; }
 .boxes > .box.maximize input {
   width: 95% !important;
 }
+.boxes > .box.maximize .body {
+  height: 600px;
+}
 .boxes > .box.glow {
   -webkit-box-shadow: 0 0 5px 1px #5d5d5d;
   -moz-box-shadow: 0 0 5px 1px #5d5d5d;
@@ -1643,9 +1662,8 @@ border-radius: 4px; }
   font-size: 1em;
 }
 .boxes > .box .label .controls .bbutton:hover {
-  color: #fecf23;
-  text-shadow: 0px 0px 5px rgba(253,146,21,0.5);
-  background-color: #9e98a9;
+  color: #7db647;
+  text-shadow: 0px 0px 5px #8aca4d;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
