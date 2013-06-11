@@ -217,7 +217,7 @@ class api_ctl {
 
     $message->body = $_REQUEST['body'];
     $message->status = 'pending';
-    $message->date = time();
+    $message->date = MongoDate();
     $message->which = 'to';
     $message->save();
 

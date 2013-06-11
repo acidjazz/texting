@@ -58,8 +58,8 @@ var time = {
     var months = Math.floor(diff/60/60/24/30);
     var days = Math.floor(diff/60/60/24 - (months*30));
     var hours = Math.floor(diff/60/60);
-    var minutes = Math.floor(diff/60);
-    var seconds = Math.floor(diff - (minutes*60));
+    var minutes = Math.floor(diff/60 - (hours*60));
+    var seconds = Math.floor(diff - (minutes*60) - (hours*60*60));
 
     var values =  {seconds: seconds, minutes: minutes, hours: hours, days: days, months: months};
     
@@ -109,7 +109,7 @@ var time = {
     if (diff.seconds > 0 && diff.minutes < 10) {
       copy += diff.seconds + ' second';
       if (diff.seconds > 1) {
-        copy += 's'; 
+        copy += 's';
       }
     }
 

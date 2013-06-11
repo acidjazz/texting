@@ -8,8 +8,10 @@ each message, index in messages
       .picture.icon-user
       .triangle
     .copy #{message.body}
-    if message.status != "pending"
-      .date: abbr.timestamp(data-stamp=message.date) loading
+    if message.date_sent && message.date_sent.sec != 0
+      .date: abbr.timestamp(data-stamp=message.date_sent.sec) loading
+    else if message.date && message.date.sec != 0
+      .date: abbr.timestamp(data-stamp=message.date.sec) loading
     else
       .date
         include _tloader

@@ -214,7 +214,7 @@ class android_ctl {
 
           case 'date' :
           case 'date_sent' :
-            $message->$k = floatval($v);
+            $message->$k = new MongoDate($v/1000);
             break;
           case 'body' :
             $message->$k = utf8_encode($v);
