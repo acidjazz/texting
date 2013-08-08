@@ -217,13 +217,14 @@ class api_ctl {
 
     $message->body = $_REQUEST['body'];
     $message->status = 'pending';
-    $message->date = MongoDate();
+    $message->date = new MongoDate();
     $message->which = 'to';
     $message->save();
 
     if ($this->user->regid) {
       $gcm = new gcm();
-      $results = $gcm->send($this->user->regid, $message->data());
+
+      $results = $gcm->send($this->user->regid, ['type' => 'send', 'data' => $message->data(true)]);
       $message->gcm_message_id = $results['results'][0]['message_id'];
       $message->save();
     }

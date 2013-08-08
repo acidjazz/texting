@@ -19,8 +19,20 @@ class android_ctl {
 
     // globally allow deivce info updating
     if (isset($_REQUEST['device'])) {
-      $device = json_decode($_REQUEST['device']);
-      $this->user->device = json_decode($_REQUEST['device']);
+      $device = json_decode($_REQUEST['device'], true);
+      if ($this->user->device == null) {
+        $this->user->device = $device;
+      } else {
+
+        $userdevice = $this->user->device;
+
+        foreach ($device as $key=>$value) {
+          $userdevice[$key] = $value;
+        }
+
+        $this->user->device = $userdevice;
+      }
+      $this->user->save();
     }
 
   }
@@ -128,12 +140,13 @@ class android_ctl {
 
   private function _confirm() {
 
-    if (!isset($_REQUEST['messages'])) {
+
+    if (!isset($_REQUEST['confirms'])) {
       echo json_encode(['error' => true, 'status' => 'no messages specified']);
       return false;
     }
 
-    $msgs = json_decode($_REQUEST['messages'], true);
+    $msgs = json_decode($_REQUEST['confirms'], true);
 
     if ($msgs == null) {
       echo json_encode(['error' => true, 'status' => 'invalid json format']);
@@ -142,10 +155,10 @@ class android_ctl {
 
     foreach ($msgs as $msg) {
 
-      $message = new message(new MongoId($msg['$id']));
+      $message = new message(new MongoId($msg));
 
       if (!$message->exists()) {
-        echo json_encode(['error' => true, 'status' => 'message not found: ' . $msg['$id']]);
+        echo json_encode(['error' => true, 'status' => 'message not found: ' . $msg]);
         return false;
       }
 
@@ -156,7 +169,7 @@ class android_ctl {
 
 
       $message->status = 'confirmed';
-      $message->date = $msg['date'];
+      //$message->date = $msg['date'];
       $message->save();
     }
 
@@ -170,7 +183,6 @@ class android_ctl {
   }
 
   private function _import($args) {
-
 
     if (!isset($_REQUEST['messages'])) {
       echo json_encode(['error' => true, 'status' => 'no messages specified']);

@@ -164,7 +164,7 @@ class kcol {
 
   }
 
-  public function data() {
+  public function data($rawid=false) {
 
     $data = $this->_data;
 
@@ -172,6 +172,10 @@ class kcol {
       foreach ($this->_ols as $ol) {
         $data[$ol] = $this->$ol;
       }
+    }
+
+    if ($rawid) {
+      $data['_id'] = $data['_id']->{'$id'};
     }
 
     return $data;

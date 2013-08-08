@@ -27,7 +27,7 @@ class contactBinder {
 
   }
 
-  public function strip($phone) {
+  public static function strip($phone) {
 
     $stripped = str_replace(['-','+',' ','(', ')'], ['','','', '', ''], $phone);
 
@@ -41,7 +41,7 @@ class contactBinder {
 
   public function search($number) {
 
-    $number = $this->strip($number);
+    $number = self::strip($number);
 
     foreach ($this->contacts as $id=>$phones) {
       foreach ($phones as $phone) {

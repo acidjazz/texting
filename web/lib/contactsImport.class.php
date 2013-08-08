@@ -47,6 +47,12 @@ class contactsImport {
 
     $totalContacts = 0;
     $currentContacts = 0;
+    
+    $messages = [];
+    foreach (message::find(['_user_id' => $this->user->_id]) as $msg) {
+      $message = message::i($msg);
+      $messages[$message->id(true)] = $message;
+    }
 
     foreach ($groups['feed']['entry'] as $grp) {
 
@@ -114,7 +120,6 @@ class contactsImport {
           }
           $contact->phones = $phones;
 
-
           $contact->_user_id = $this->user->id();
           $contact->id = $entry['id']['$t'];
           $contact->name = $entry['title']['$t'];
@@ -149,6 +154,18 @@ class contactsImport {
           }
 
           $contact->save();
+
+          foreach ($messages as $message) {
+            foreach ($contact->phones as $phone) {
+              if ( $phone != null && $message->address != null &&
+                  contactBinder::strip($phone) == contactBinder::strip($message->address)
+                  ) {
+                $message->_contact_id = $contact->id();
+                $message->save();
+              }
+            }
+          }
+
           $currentContacts++;
 
         }

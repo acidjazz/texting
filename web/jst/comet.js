@@ -1,6 +1,9 @@
 var comet = {
 
-  pending: [],
+  data: {
+    pending: [],
+    device: []
+  },
 
   i: function() {
 
