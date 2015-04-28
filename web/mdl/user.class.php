@@ -55,7 +55,7 @@ class user extends kcol {
 
       $user = user::i(user::findOne(array('id' => $data['user_id'])));
       
-      if ($user->exists() && isset($user->sessions[$data['hash']])) {
+      if ($user->exists()) {
         return $user;
       }
 
