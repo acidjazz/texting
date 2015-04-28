@@ -47,11 +47,11 @@ class jade {
           }
           kdebug::handler(E_ERROR, '<b>[JADE]</b> '.$errormessage, $matches[2], $matches[3]);
         } else {
-          trigger_error("Jade compilation error: <pre>".join("\n", $results)."</pre>");
+          trigger_error("Jade compilation error for $template: <pre>".join("\n", $results)."</pre>");
         }
 
       } else {
-        trigger_error("Jade compilation error: <pre>".join("\n", $results)."</pre>");
+        trigger_error("Jade compilation error for $template: <pre>".join("\n", $results)."</pre>");
       }
 
       return false;
